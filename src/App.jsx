@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GlobalStyle from "./styles.js/GlobalStyle";
+import Home from "./pages/HomePage";
+import User from "./pages/UserPage/index.jsx";
 import LogOutProvider from "./contexts/MenuContext";
 import LogInProvider from "./contexts/PersistenLogInContext";
-import User from "./pages/UserPage/index.jsx";
+
 
 export default function App() {
   return (
@@ -11,9 +14,10 @@ export default function App() {
           <Routes>
             <Route />
             <Route path="/user/:id" element={<User />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </LogOutProvider>
-      </LogInProvider>      
-    </BrowserRouter>
+      </LogInProvider>
+    </BrowserRouter >
   );
 }
