@@ -9,13 +9,11 @@ export default function App() {
       <LogInProvider>
         <LogOutProvider>
           <Routes>
+            <Route />
+            <Route path="/user/:id" element={<User />} />
           </Routes>
         </LogOutProvider>
-      </LogInProvider>
-      <Routes>
-        <Route />
-        <Route path="/user/:id" element={<User />} />
-      </Routes>
+      </LogInProvider>      
     </BrowserRouter>
   );
 }
