@@ -13,3 +13,7 @@ const getUsers = () => {
 export default {
   getUsers
 };
+
+export const logOutUser = () => {
+  return axiosInstance.delete('/logout')
+};
