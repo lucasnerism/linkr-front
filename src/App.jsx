@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogOutProvider from "./contexts/MenuContext";
 import LogInProvider from "./contexts/PersistenLogInContext";
+import User from "./pages/UserPage/index.jsx";
 
 export default function App() {
   return (
@@ -11,6 +12,10 @@ export default function App() {
           </Routes>
         </LogOutProvider>
       </LogInProvider>
+      <Routes>
+        <Route />
+        <Route path="/user/:id" element={<User />} />
+      </Routes>
     </BrowserRouter>
   );
 }
