@@ -22,6 +22,10 @@ const getUserById = (id, token) => {
   return axiosInstance.get(`/user/${id}`, createHeader(token));
 };
 
+export const logOutUser = () => {
+  return axiosInstance.delete('/logout')
+};
+
 export default {
   searchUsers,
   getUserById
