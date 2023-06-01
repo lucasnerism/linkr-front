@@ -1,16 +1,21 @@
 import styled from "styled-components"
-import CardForm from "../../components/Cards/Card"
-import Card from "../../components/Cards/Card2"
+import CardForm from "../../components/Cards/FormCard"
+import Card from "../../components/Cards/PostCard"
+import Header from "../../components/Header"
 
 export default function Home() {
 
     return (
-       <Container>
-            <h1>timeline</h1>
-            <CardForm/>
-            <Card/>
-            <Card/>
-       </Container>
+        <>
+        <Header />
+            <Container>
+                <h1>timeline</h1>
+                <CardForm />
+                <Card />
+                <Card />
+            </Container>
+        </>
+
     )
 }
 
