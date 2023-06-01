@@ -1,34 +1,40 @@
 import { PageContainer, Rigth, Left, CustomLink } from "./style";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import api from "../../services/api";
 
 
 export default function SignUpPage(){
-    const {user, setUser} = useContext(UserContext);
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({email:'', password:'', username:'', profile_picture:''});
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false)
+  
     function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  
     function handleSubmit(e) {
-        e.preventDefault();
-
-        const promise = api.signIn({ ...formData });
-        promise.then((response) => {
+      e.preventDefault();
+      setLoading(true)
+  
+ 
+      const promise = api.signUp({...formData });
+      promise.then((response) => {
         console.log(response.data);
-        const {idUser, token, name} = response.data;
-        setUser({idUser, token, name});
-        localStorage.setItem("user", JSON.stringify({idUser, token, name}))
-        navigate("/home");
-    });
-
-        promise.catch((error) => {
-        if ( error.response.status === 404 || error.response.status === 401) {
-            alert('Verifique se os dados foram preenchidos corretamente');
-        };
-     
-    });
-  }
+        setLoading(false)
+        navigate("/");
+      });
+      promise.catch((error) => {
+        setLoading(false)
+      if (error.response.status === 422) {
+          alert("O cadastro falhou. Verifique se os dados foram preenchidos corretamente!")
+      }else if (error.response.status === 409) {
+          alert("Email já utilizado")
+      } 
+      });
+    }
+  
 
     return (
         <PageContainer>
@@ -38,6 +44,7 @@ export default function SignUpPage(){
             </Left> 
 
             <Rigth>
+                <form onSubmit={handleSubmit}> 
                 <input
                 placeholder="e-mail"
                 type="email"
@@ -45,19 +52,36 @@ export default function SignUpPage(){
                 onChange={handleChange}
                 value={formData.email}>
                 </input>
+
                 <input
-                placeholder="password">
-                </input>
-                <input
-                placeholder="username">
-                </input>
-                <input
-                placeholder="picture url">
+                placeholder="password"
+                type="password"
+                name="password"
+                onChange={handleChange}
+                value={formData.password}>
                 </input>
 
-                <button>Sign Up</button>
+                <input
+                placeholder="username"
+                type="text"
+                name="username"
+                onChange={handleChange}
+                value={formData.username}>
+                </input>
 
-                <CustomLink to="/sign-in">Switch back to log in</CustomLink>
+                <input
+                placeholder="picture url"
+                type="text"
+                name="profile_picture"
+                onChange={handleChange}
+                value={formData.profile_picture}>
+                </input>
+
+                <button disabled={loading} type="submit">Sign Up</button>
+                </form>
+
+
+                <CustomLink to="/">Switch back to log in</CustomLink>
             </Rigth>
 
         </PageContainer>

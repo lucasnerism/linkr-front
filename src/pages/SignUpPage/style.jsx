@@ -48,6 +48,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 input{
 box-sizing: border-box;
 width: 429px;
