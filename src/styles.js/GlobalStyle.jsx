@@ -7,7 +7,9 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Lato', sans-serif;
-    font-weight: 400;    
+    font-weight: 400;
+    background: #333333;
+;
   }
   a{
     text-decoration: none;

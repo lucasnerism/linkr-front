@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container } from "./styled/Container.jsx";
+import { Link } from "react-router-dom";
 import { UserImage } from "./styled/UserImage.jsx"
 import { editPostComment } from "../../services/api.js";
 import React, { useEffect, useRef } from "react";
@@ -47,7 +48,8 @@ export default function PostCard({commentText}) {
         <Container >
             <UserImage />
             <Form>
-                <UserName>Juvenal Juvêncio 
+
+                <UserName><Link to={`/user/-inserirIdAqui-`}>Juvenal Juvêncio </Link>
                     <EditionButton onClick={(event) => focusEdition(event)}/>
                 </UserName>
 
@@ -62,22 +64,22 @@ export default function PostCard({commentText}) {
 
 
                 <PostContainer>
-                   <div>
-                   <PostTitle>
-                        Como aplicar o Material UI em um
-                        projeto React
-                    </PostTitle>
+                    <div>
+                        <PostTitle>
+                            Como aplicar o Material UI em um
+                            projeto React
+                        </PostTitle>
 
-                    <PostComment>
-                        Hey! I have moved this tutorial to my personal blog. Same content, new location. Sorry about making you click through to another page.
-                    </PostComment>
+                        <PostComment>
+                            Hey! I have moved this tutorial to my personal blog. Same content, new location. Sorry about making you click through to another page.
+                        </PostComment>
 
-                    <LinkPost>
-                        https://medium.com/@pshrmn/a-simple-react-router
-                    </LinkPost>
-                   </div>
+                        <LinkPost>
+                            https://medium.com/@pshrmn/a-simple-react-router
+                        </LinkPost>
+                    </div>
 
-                    <ImagePost/>
+                    <ImagePost />
 
                 </PostContainer>
             </Form>
@@ -99,7 +101,7 @@ const EditionButton = styled(HiPencil)`
 const Form = styled.form`
     width: 300px;
     margin-left: 15px;
-`
+`;
 const UserName = styled.p`
     font-family: 'Lato';
     font-style: normal;
@@ -110,7 +112,7 @@ const UserName = styled.p`
     position: relative;
     width: 502px;
     color: #FFFFFF;
-`
+`;
 const Comment = styled.p`
     width: 502px;
     height: 52px;
@@ -126,7 +128,7 @@ const Comment = styled.p`
     margin: 10px 0px;
     color: #B7B7B7;
     
-`
+`;
 const PostContainer = styled.div`
     box-sizing: border-box;
     width: 503px;
@@ -140,7 +142,7 @@ const PostContainer = styled.div`
         box-sizing: border-box;
         padding-left: 15px;
     }
-`
+`;
 const PostTitle = styled.p`
 
     width: 249.98px;
@@ -151,7 +153,7 @@ const PostTitle = styled.p`
     font-size: 16px;
     line-height: 19px;
     color: #CECECE;
-`
+`;
 const PostComment = styled.p`
     width: 302.82px;
     height: 39px;
@@ -161,7 +163,7 @@ const PostComment = styled.p`
     font-size: 11px;
     line-height: 13px;
     color: #9B9595;
-`
+`;
 const LinkPost = styled.p`
     width: 263.19px;
     height: 13px;
@@ -171,11 +173,11 @@ const LinkPost = styled.p`
     font-size: 11px;
     line-height: 13px;
     color: #CECECE;
-`
+`;
 const ImagePost = styled.img`
     width: 153.44px;
     height: 153.4px;
     background: url(image.png);
     background-color: blue;
     border-radius: 0px 12px 13px 0px;
-`
+`;
