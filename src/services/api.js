@@ -14,6 +14,16 @@ const createHeader = (token) => {
   };
 };
 
+function signIn(body) {
+  const promise = axiosInstance.post(`/sign-in`, body);
+  return promise;
+};
+
+function signUp(body) {
+  const promise = axiosInstance.post(`/sign-up`, body);
+  return promise;
+};
+
 const searchUsers = (query, token) => {
   return axiosInstance.get(`/user?${query}`, createHeader(token));
 };
@@ -34,5 +44,7 @@ export const editPostComment = (body, token) => {
 export default {
   searchUsers,
   getUserById,
+  signUp, 
+  signIn,
   logOutUser
 };

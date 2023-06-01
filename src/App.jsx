@@ -4,6 +4,8 @@ import User from "./pages/UserPage/index.jsx";
 import LogOutProvider from "./contexts/MenuContext";
 import LogInProvider from "./contexts/PersistenLogInContext";
 
+import SignUpPage from "./pages/SignUpPage/index.jsx";
+import SignInPage from "./pages/SignInPage/index.jsx";
 
 export default function App() {
   return (
@@ -11,9 +13,10 @@ export default function App() {
       <LogInProvider>
         <LogOutProvider>
           <Routes>
-            <Route />
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/user/:id" element={<User />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/timeline" element={<Home />} />
           </Routes>
         </LogOutProvider>
       </LogInProvider>
