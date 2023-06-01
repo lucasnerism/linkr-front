@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import CardForm from "../../components/Cards/FormCard"
-import Card from "../../components/Cards/PostCard"
+import PostCard from "../../components/Cards/PostCard"
 import Header from "../../components/Header"
 
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
             <Container>
                 <h1>timeline</h1>
                 <CardForm />
-                <Card />
-                <Card />
+                <PostCard />
+                <PostCard />
             </Container>
         </>
 
