@@ -1,18 +1,67 @@
 import styled from "styled-components";
 import { Container } from "./styled/Container.jsx";
-import { UserImage } from "./styled/UserImage.jsx";
 import { Link } from "react-router-dom";
+import { UserImage } from "./styled/UserImage.jsx"
+import { editPostComment } from "../../services/api.js";
+import React, { useEffect, useRef } from "react";
+import { HiPencil } from "react-icons/hi";
 
-export default function PostCard() {
+export default function PostCard({commentText}) {
+
+    const textRef = useRef("");
+    const [edition, setEdition] = React.useState(false)
+    const [comment, setComment] = React.useState("Apenas um texto comum de teste")
+    const [editedText, setEditedText] = React.useState("");
+
+    const handleEdition = (event) => {
+        if ( editedText !== "" && edition && event.keyCode == 27) {
+            setEdition(false)
+            editedText.textContent=comment
+            textRef.current.blur();
+            return 
+        }
+
+        if (event.key === 'Enter'){
+            // Faça uma requisicao axios
+            setEdition(false)
+            setComment(editedText.textContent)
+            console.log("EDICAO SALVA")
+        }
+    }
+
+    const focusEdition = (event) => {
+        // console.log(textRef.current.value)
+        textRef.current.focus();
+
+    
+        if(editedText !== "" && edition){
+            setEdition(false)
+            editedText.textContent=comment
+            textRef.current.blur();
+        }else {
+            setEdition(true);
+            textRef.current.focus();
+        }
+    }
+
     return (
         <Container >
             <UserImage />
             <Form>
-                <Link to={`/user/-inserirIdAqui-`}><UserName>Juvenal Juvêncio </UserName></Link>
 
-                <Comment>
-                    Muito maneiro esse tutorial de Material UI com React, deem uma olhada!
+                <UserName><Link to={`/user/-inserirIdAqui-`}>Juvenal Juvêncio </Link>
+                    <EditionButton onClick={(event) => focusEdition(event)}/>
+                </UserName>
+
+                <Comment ref={textRef} 
+                    contentEditable={edition} 
+                    onInput={(e) => setEditedText(e.currentTarget)}
+                    isEditing={edition}
+                    onKeyDown={(event) => handleEdition(event)}
+                >
+                    {comment}
                 </Comment>
+
 
                 <PostContainer>
                     <div>
@@ -39,6 +88,16 @@ export default function PostCard() {
     );
 }
 
+const EditionButton = styled(HiPencil)`
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    bottom: 1000px;
+`
+
 const Form = styled.form`
     width: 300px;
     margin-left: 15px;
@@ -50,6 +109,8 @@ const UserName = styled.p`
     font-size: 19px;
     line-height: 23px;
     /* identical to box height */
+    position: relative;
+    width: 502px;
     color: #FFFFFF;
 `;
 const Comment = styled.p`
@@ -60,7 +121,11 @@ const Comment = styled.p`
     font-weight: 400;
     font-size: 17px;
     line-height: 20px;
-
+    background-color: ${(props) => props.isEditing ? "#FFFAFA" : "#171717"};
+    /* opacity: ${(props) => props.isEditing ? "#FFFAFA" : "black"}; */
+    border: ${(props) => props.isEditing ? "1px solid grey" : "none"};
+    border-radius: 10px;
+    margin: 10px 0px;
     color: #B7B7B7;
     
 `;

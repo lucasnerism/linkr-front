@@ -22,11 +22,17 @@ const getUserById = (id, token) => {
   return axiosInstance.get(`/user/${id}`, createHeader(token));
 };
 
-export const logOutUser = () => {
-  return axiosInstance.delete('/logout')
+const logOutUser = (token) => {
+  return axiosInstance.delete('/sign-out', createHeader(token));
 };
+
+export const editPostComment = (body, token) => {
+  return axiosInstance.put(`/user/post`, body,createHeader(token));
+};
+
 
 export default {
   searchUsers,
-  getUserById
+  getUserById,
+  logOutUser
 };
