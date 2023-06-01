@@ -12,17 +12,18 @@ export default function PostCard({commentText}) {
     const [comment, setComment] = React.useState("Apenas um texto comum de teste")
     const [editedText, setEditedText] = React.useState("");
 
-    const handleEdition = () => {
-        const body = {
-            newComment: textRef.current.value
-        }
-    }
-
-    const closeEdition = (event) => {
+    const handleEdition = (event) => {
         if ( editedText !== "" && edition && event.keyCode == 27) {
             setEdition(false)
             editedText.textContent=comment
             textRef.current.blur();
+            return 
+        }
+
+        if (event.key === 'Enter'){
+            // Faça uma requisicao axios
+            setEdition(false)
+            console.log("EDICAO SALVA")
         }
     }
 
@@ -41,11 +42,6 @@ export default function PostCard({commentText}) {
         }
     }
 
-    useEffect (() => {
-        console.log("RE-RENDERIZEI")
-    }, []) 
-
-
     return (
         <Container >
             <UserImage />
@@ -58,7 +54,7 @@ export default function PostCard({commentText}) {
                     contentEditable={edition} 
                     onInput={(e) => setEditedText(e.currentTarget)}
                     isEditing={edition}
-                    onKeyDown={(event) => closeEdition(event)}
+                    onKeyDown={(event) => handleEdition(event)}
                 >
                     {comment}
                 </Comment>
