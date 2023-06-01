@@ -23,6 +23,7 @@ export default function PostCard({commentText}) {
         if (event.key === 'Enter'){
             // Faça uma requisicao axios
             setEdition(false)
+            setComment(editedText.textContent)
             console.log("EDICAO SALVA")
         }
     }
