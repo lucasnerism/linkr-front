@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GlobalStyle from "./styles.js/GlobalStyle";
 import Home from "./pages/HomePage";
 import User from "./pages/UserPage/index.jsx";
 import LogOutProvider from "./contexts/MenuContext";

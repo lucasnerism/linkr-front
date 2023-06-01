@@ -4,25 +4,36 @@ import { DebounceInput } from "react-debounce-input";
 import { FaSearch } from "react-icons/fa";
 import { Link, createSearchParams } from "react-router-dom";
 import api from "../../services/api.js";
+import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 export default function SearchBar() {
   const [users, setUsers] = useState([]);
-  // const { token } = useContext()
-  const token = "";
+  const [name, setName] = useState("");
+  const { localToken } = useContext(LogInContext);
 
   const handleChange = (e) => {
-    const name = e.target.value;
-    const query = createSearchParams({ name });
-    api.searchUsers(query.toString(), token)
+    setName(e.target.value);
+    const query = createSearchParams({ name: e.target.value });
+    api.searchUsers(query.toString(), localToken.token)
       .then(res => {
         setUsers(res.data);
       })
-      .catch(err => console.log(err?.response.data));
+      .catch(err => console.log(err?.response?.data));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const query = createSearchParams({ name });
+    api.searchUsers(query.toString(), localToken.token)
+      .then(res => {
+        setUsers(res.data);
+      })
+      .catch(err => console.log(err?.response?.data));
   };
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <DebounceInput
           minLength={3}
           debounceTimeout={300}
@@ -32,17 +43,17 @@ export default function SearchBar() {
         />
         <Button><FaSearch className="react-icon" /></Button>
       </Form>
-      {users.length !== 0 ? <div>
+      {name ? <div>
         {users?.map(user =>
-          <User>
+          <User key={user.id}>
             <Link to={`/user/${user.id}`}>
               <img src={user.image} alt={user.name} />
               <p>{user.name}</p>
             </Link>
           </User>
         )}
-      </div> : ""
-      }
+      </div> : ""}
+
     </Container>
   );
 }
