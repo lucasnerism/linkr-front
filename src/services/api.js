@@ -26,6 +26,11 @@ const logOutUser = (token) => {
   return axiosInstance.delete('/sign-out', createHeader(token));
 };
 
+export const editPostComment = (body, token) => {
+  return axiosInstance.put(`/user/post`, body,createHeader(token));
+};
+
+
 export default {
   searchUsers,
   getUserById,
