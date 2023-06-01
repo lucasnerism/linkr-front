@@ -8,7 +8,7 @@ import { Container, UserTitle } from "./style.jsx";
 
 export default function User() {
   const { id } = useParams();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState("");
   const { localToken } = useContext(LogInContext);
 
 
@@ -24,10 +24,10 @@ export default function User() {
     <>
       <Header />
       <Container>
-        <UserTitle>
+        {user ? <UserTitle>
           <img src={user.image} alt="" />
           <h1><span>{user.name}</span>`s posts</h1>
-        </UserTitle>
+        </UserTitle> : ""}
         <div>
           <div>
             {user.posts?.map(post =>

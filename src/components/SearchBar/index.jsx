@@ -32,7 +32,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Container>
+    <Container data-test="search">
       <Form onSubmit={handleSubmit}>
         <DebounceInput
           minLength={3}
@@ -45,7 +45,7 @@ export default function SearchBar() {
       </Form>
       {name ? <div>
         {users?.map(user =>
-          <User key={user.id}>
+          <User key={user.id} data-test="user-search">
             <Link to={`/user/${user.id}`}>
               <img src={user.image} alt={user.name} />
               <p>{user.name}</p>
