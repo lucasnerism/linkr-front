@@ -5,6 +5,7 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import Header from "../../components/Header.jsx";
 import PostCard from "../../components/Cards/PostCard.jsx";
 import { Container, UserTitle } from "./style.jsx";
+import Hashtags from "../../components/Hashtags/index.jsx";
 
 export default function User() {
   const { id } = useParams();
@@ -43,6 +44,7 @@ export default function User() {
               />
             )}
           </div>
+          <Hashtags />
         </div>
       </Container>
     </>
