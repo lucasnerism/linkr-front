@@ -5,6 +5,8 @@ import { UserImage } from "./styled/UserImage.jsx"
 import { editPostComment } from "../../services/api.js";
 import React, { useEffect, useRef } from "react";
 import { HiPencil } from "react-icons/hi";
+import { HiArchiveBoxXMark } from "react-icons/hi2";
+
 
 export default function PostCard({commentText}) {
 
@@ -51,6 +53,7 @@ export default function PostCard({commentText}) {
 
                 <UserName><Link to={`/user/-inserirIdAqui-`}>Juvenal Juvêncio </Link>
                     <EditionButton onClick={(event) => focusEdition(event)}/>
+                    <DeleteButton></DeleteButton>
                 </UserName>
 
                 <Comment ref={textRef} 
@@ -94,7 +97,17 @@ const EditionButton = styled(HiPencil)`
     position: absolute;
     color: white;
     top: 0;
-    right: 0;
+    right: 35px;
+    bottom: 1000px;
+`
+
+const DeleteButton = styled(HiArchiveBoxXMark)`
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 5px;
     bottom: 1000px;
 `
 

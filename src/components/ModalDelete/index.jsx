@@ -1,26 +1,49 @@
 import React from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import api from "../../services/api";
+import { useContext } from 'react';
+import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
+
 
 Modal.setAppElement('#root');
 
-export default function ModalPage() {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+export default function ModalPage({openDeleteModal, setLoading, postId}) {
+  const [modalIsOpen, setIsOpen] = React.useState(openDeleteModal);
+  const { localToken } = useContext(LogInContext);
 
-  function abrirModal() {
+
+  function openModal() {
     setIsOpen(true);
   }
 
-  function fecharModal() {
+  function closeModal() {
     setIsOpen(false);
+  }
+
+  function deletePost () {
+    setLoading(true);
+    api.deletePost(postId, localToken)
+    .then((response) => {
+      console.log(response.data);
+      setLoading(false);
+      // recarregar os posts
+      closeModal();
+      window.location.reload();
+    })
+    .catch((error) => {
+      setLoading(false);
+      alert("Não foi possível exlcluir o post!");
+      closeModal();
+    });
   }
 
   return (
     <ModalContainer>
-      <button onClick={abrirModal}>Abrir modal</button>
+      <button onClick={openModal}>Abrir modal</button>
         <ModalDelete
           isOpen={modalIsOpen}
-          onRequestClose={fecharModal}
+          onRequestClose={closeModal}
           contentLabel="Are you sure you want to delete this post?"
           style={{
             overlay: {
@@ -53,8 +76,8 @@ export default function ModalPage() {
           <ModalText>
             <h2>Are you sure you want to delete this?</h2>
             <ConfirmOptions>
-              <Yes onClick={fecharModal}>No, go back</Yes>
-              <No onClick={fecharModal}>Yes, delet it</No>
+              <Yes onClick={deletePost}>No, go back</Yes>
+              <No onClick={closeModal}>Yes, delet it</No>
             </ConfirmOptions>
           </ModalText>
         </ModalDelete>
