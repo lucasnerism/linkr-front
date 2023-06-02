@@ -6,41 +6,34 @@ import { useContext } from 'react';
 import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 
-Modal.setAppElement('#root');
 
 export default function ModalPage({openDeleteModal, setLoading, postId}) {
   const [modalIsOpen, setIsOpen] = React.useState(openDeleteModal);
   const { localToken } = useContext(LogInContext);
-
-
-  function openModal() {
-    setIsOpen(true);
-  }
 
   function closeModal() {
     setIsOpen(false);
   }
 
   function deletePost () {
-    setLoading(true);
-    api.deletePost(postId, localToken)
-    .then((response) => {
-      console.log(response.data);
-      setLoading(false);
-      // recarregar os posts
-      closeModal();
-      window.location.reload();
-    })
-    .catch((error) => {
-      setLoading(false);
-      alert("Não foi possível exlcluir o post!");
-      closeModal();
-    });
+    // setLoading(true);
+    // api.deletePost(postId, localToken)
+    // .then((response) => {
+    //   console.log(response.data);
+    //   setLoading(false);
+    //   // recarregar os posts
+    //   closeModal();
+    //   window.location.reload();
+    // })
+    // .catch((error) => {
+    //   setLoading(false);
+    //   alert("Não foi possível exlcluir o post!");
+    //   closeModal();
+    // });
   }
 
   return (
     <ModalContainer>
-      <button onClick={openModal}>Abrir modal</button>
         <ModalDelete
           isOpen={modalIsOpen}
           onRequestClose={closeModal}

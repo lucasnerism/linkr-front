@@ -6,6 +6,7 @@ import { editPostComment } from "../../services/api.js";
 import React, { useEffect, useRef } from "react";
 import { HiPencil } from "react-icons/hi";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
+import ModalPage from "../ModalDelete/index.jsx";
 
 
 export default function PostCard({commentText}) {
@@ -14,6 +15,9 @@ export default function PostCard({commentText}) {
     const [edition, setEdition] = React.useState(false)
     const [comment, setComment] = React.useState("Apenas um texto comum de teste")
     const [editedText, setEditedText] = React.useState("");
+    const [openedDeleteModal, setOpenedModal] = React.useState(false);
+    const [loading, setLoading] = React.useState(false)
+    const [postId, setPostId] = React.useState("");
 
     const handleEdition = (event) => {
         if ( editedText !== "" && edition && event.keyCode == 27) {
@@ -46,14 +50,23 @@ export default function PostCard({commentText}) {
         }
     }
 
+    function openModal(){
+        setOpenedModal(true)
+        console.log("TENTEI ABRIR MODAL: ", openedDeleteModal)
+    }
+
     return (
         <Container >
             <UserImage />
             <Form>
-
                 <UserName><Link to={`/user/-inserirIdAqui-`}>Juvenal Juvêncio </Link>
                     <EditionButton onClick={(event) => focusEdition(event)}/>
-                    <DeleteButton></DeleteButton>
+                    <DeleteButton onClick={openModal}></DeleteButton>
+                    <ModalPage 
+                        openDeleteModal={openedDeleteModal}
+                        setLoading={setLoading}
+                        postId={postId}
+                    ></ModalPage>
                 </UserName>
 
                 <Comment ref={textRef} 
