@@ -10,6 +10,7 @@ import ModalPage from "../ModalDelete/index.jsx";
 import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import { useContext } from "react";
+import ModalLoadingPage from "../LoadingModal/index.jsx";
 
 export default function PostCard({commentText}) {
 
@@ -24,7 +25,7 @@ export default function PostCard({commentText}) {
 
     const handleEdition = (event) => {
         if ( editedText !== "" && edition && event.keyCode == 27) {
-            setEdition(false)
+            setEdition(false)     
             editedText.textContent=comment
             textRef.current.blur();
             return 
@@ -72,7 +73,9 @@ export default function PostCard({commentText}) {
     function openModal(){
         setOpenedModal(true)
         console.log("TENTEI ABRIR MODAL: ", openedDeleteModal)
-    }
+    }   
+
+
 
     return (
         <Container >
@@ -87,6 +90,7 @@ export default function PostCard({commentText}) {
                         setLoading={setLoading}
                         postId={postId}
                     ></ModalPage>
+                    <ModalLoadingPage loading={loading}></ModalLoadingPage>
                 </UserName>
 
                 <Comment ref={textRef} 
@@ -119,7 +123,6 @@ export default function PostCard({commentText}) {
 
                 </PostContainer>
             </Form>
-
         </Container>
     );
 }
@@ -154,7 +157,6 @@ const UserName = styled.p`
     font-weight: 400;
     font-size: 19px;
     line-height: 23px;
-    /* identical to box height */
     position: relative;
     width: 502px;
     color: #FFFFFF;
@@ -168,7 +170,6 @@ const Comment = styled.p`
     font-size: 17px;
     line-height: 20px;
     background-color: ${(props) => props.isEditing ? "#FFFAFA" : "#171717"};
-    /* opacity: ${(props) => props.isEditing ? "#FFFAFA" : "black"}; */
     border: ${(props) => props.isEditing ? "1px solid grey" : "none"};
     border-radius: 10px;
     margin: 10px 0px;
