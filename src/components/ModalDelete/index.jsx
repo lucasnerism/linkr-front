@@ -15,20 +15,20 @@ export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading
   }
 
   function deletePost () {
-    // setLoading(true);
-    // api.deletePost(postId, localToken)
-    // .then((response) => {
-    //   console.log(response.data);
-    //   setLoading(false);
-    //   // recarregar os posts
-    //   setOpenedModal(false);
-    //   window.location.reload();
-    // })
-    // .catch((error) => {
-    //   setLoading(false);
-    //   alert("Não foi possível exlcluir o post!");
-    //   setOpenedModal(false);
-    // });
+    setLoading(true);
+    api.deletePost(postId, localToken)
+    .then((response) => {
+      console.log(response.data);
+      setLoading(false);
+      // recarregar os posts
+      setOpenedModal(false);
+      window.location.reload();
+    })
+    .catch((error) => {
+      setLoading(false);
+      alert("Não foi possível exlcluir o post!");
+      setOpenedModal(false);
+    });
   }
 
   return (

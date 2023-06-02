@@ -7,7 +7,9 @@ import React, { useEffect, useRef } from "react";
 import { HiPencil } from "react-icons/hi";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import ModalPage from "../ModalDelete/index.jsx";
-
+import api from "../../services/api.js";
+import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
+import { useContext } from "react";
 
 export default function PostCard({commentText}) {
 
@@ -18,6 +20,7 @@ export default function PostCard({commentText}) {
     const [openedDeleteModal, setOpenedModal] = React.useState(false);
     const [loading, setLoading] = React.useState(false)
     const [postId, setPostId] = React.useState("");
+    const { localToken } = useContext(LogInContext);
 
     const handleEdition = (event) => {
         if ( editedText !== "" && edition && event.keyCode == 27) {
@@ -30,8 +33,24 @@ export default function PostCard({commentText}) {
         if (event.key === 'Enter'){
             // Faça uma requisicao axios
             setEdition(false)
-            setComment(editedText.textContent)
-            console.log("EDICAO SALVA")
+            setLoading(true);
+            api.editPostComment(editedText.textContent, localToken)
+            .then((response) => {
+                console.log(response.data);
+                setLoading(false);
+                setEdition(false)
+                textRef.current.blur();
+
+                // recarregar os posts
+                setComment(editedText.textContent)
+            })
+            .catch((error) => {
+                setLoading(false);
+                alert("Não foi possível editar o post!");
+                setEdition(false)
+                editedText.textContent=comment
+                textRef.current.blur();
+            });
         }
     }
 
