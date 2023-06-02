@@ -7,12 +7,11 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 
 
-export default function ModalPage({openDeleteModal, setLoading, postId}) {
-  const [modalIsOpen, setIsOpen] = React.useState(openDeleteModal);
+export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading, postId,}) {
   const { localToken } = useContext(LogInContext);
 
   function closeModal() {
-    setIsOpen(false);
+    setOpenedModal(false);
   }
 
   function deletePost () {
@@ -22,20 +21,20 @@ export default function ModalPage({openDeleteModal, setLoading, postId}) {
     //   console.log(response.data);
     //   setLoading(false);
     //   // recarregar os posts
-    //   closeModal();
+    //   setOpenedModal(false);
     //   window.location.reload();
     // })
     // .catch((error) => {
     //   setLoading(false);
     //   alert("Não foi possível exlcluir o post!");
-    //   closeModal();
+    //   setOpenedModal(false);
     // });
   }
 
   return (
     <ModalContainer>
         <ModalDelete
-          isOpen={modalIsOpen}
+          isOpen={openedDeleteModal}
           onRequestClose={closeModal}
           contentLabel="Are you sure you want to delete this post?"
           style={{
@@ -69,8 +68,8 @@ export default function ModalPage({openDeleteModal, setLoading, postId}) {
           <ModalText>
             <h2>Are you sure you want to delete this?</h2>
             <ConfirmOptions>
-              <Yes onClick={deletePost}>No, go back</Yes>
-              <No onClick={closeModal}>Yes, delet it</No>
+              <No onClick={closeModal}>No, go back</No>
+              <Yes onClick={deletePost}>Yes, delete it</Yes>
             </ConfirmOptions>
           </ModalText>
         </ModalDelete>

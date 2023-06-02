@@ -63,7 +63,8 @@ export default function PostCard({commentText}) {
                     <EditionButton onClick={(event) => focusEdition(event)}/>
                     <DeleteButton onClick={openModal}></DeleteButton>
                     <ModalPage 
-                        openDeleteModal={openedDeleteModal}
+                        openedDeleteModal={openedDeleteModal}
+                        setOpenedModal={setOpenedModal}
                         setLoading={setLoading}
                         postId={postId}
                     ></ModalPage>
