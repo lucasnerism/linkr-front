@@ -56,7 +56,7 @@ export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading
               left: '50%',
               transform: 'translate(-50%, -50%)',
               border: 'none',
-              background: '#707070',
+              background: '#171717',
               overflow: 'auto',
               WebkitOverflowScrolling: 'touch',
               borderRadius: '30px',
@@ -97,8 +97,8 @@ const ConfirmOptions = styled.div`
 const Yes = styled.button`
     width: 100px;
     height: 30px;
-    background-color: white;
-    color: blue;
+    background-color: blue;
+    color: white;
     border-radius: 5px;
     border: none;
     font-weight: 700;
@@ -108,8 +108,8 @@ const Yes = styled.button`
 const No = styled.button`
     width: 100px;
     height: 30px;
-    background-color: blue;
-    color: white;
+    background-color: white;
+    color: blue;
     border-radius: 5px;
     border: none;
     font-weight: 500;
@@ -131,9 +131,8 @@ const ModalText = styled.div`
 const ModalDelete = styled(Modal)`
   width: 500px;
   height: 200px;
-  border: 1px solid black;
   transition: 5s ease-out;
-  box-shadow: -2rem 2rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 4rem 4rem 4rem rgba(0, 0, 0, 0.4);
   filter: blur(0);
   transform: scale(1);
   opacity: 1;
