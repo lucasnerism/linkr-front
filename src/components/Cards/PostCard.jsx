@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Container } from "./styled/Container.jsx";
 import { Link } from "react-router-dom";
-import { UserImage } from "./styled/UserImage.jsx"
+import { UserImage } from "./styled/UserImage.jsx";
 import { editPostComment } from "../../services/api.js";
 import React, { useEffect, useRef } from "react";
 import { HiPencil } from "react-icons/hi";
@@ -11,80 +11,81 @@ import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import { useContext } from "react";
 import ModalLoadingPage from "../LoadingModal/index.jsx";
+import Like from "../Like/index.jsx";
 
-export default function PostCard({commentText}) {
-
+export default function PostCard(props) {
+    const { id, userId, userImage, userName, comment: originalComment, link, title, description, image, hashtags, likes, commentText } = props;
     const textRef = useRef("");
-    const [edition, setEdition] = React.useState(false)
-    const [comment, setComment] = React.useState("Apenas um texto comum de teste")
+    const [edition, setEdition] = React.useState(false);
+    const [comment, setComment] = React.useState(originalComment);
     const [editedText, setEditedText] = React.useState("");
     const [openedDeleteModal, setOpenedModal] = React.useState(false);
-    const [loading, setLoading] = React.useState(false)
-    const [postId, setPostId] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
+    const [postId, setPostId] = React.useState(id);
     const { localToken } = useContext(LogInContext);
 
     const handleEdition = (event) => {
-        if ( editedText !== "" && edition && event.keyCode == 27) {
-            setEdition(false)     
-            editedText.textContent=comment
+        if (editedText !== "" && edition && event.keyCode == 27) {
+            setEdition(false);
+            editedText.textContent = comment;
             textRef.current.blur();
-            return 
+            return;
         }
 
-        if (event.key === 'Enter'){
+        if (event.key === 'Enter') {
             // Faça uma requisicao axios
-            setEdition(false)
+            setEdition(false);
             setLoading(true);
             api.editPostComment(editedText.textContent, localToken)
-            .then((response) => {
-                console.log(response.data);
-                setLoading(false);
-                setEdition(false)
-                textRef.current.blur();
+                .then((response) => {
+                    console.log(response.data);
+                    setLoading(false);
+                    setEdition(false);
+                    textRef.current.blur();
 
-                // recarregar os posts
-                setComment(editedText.textContent)
-            })
-            .catch((error) => {
-                setLoading(false);
-                alert("Não foi possível editar o post!");
-                setEdition(false)
-                editedText.textContent=comment
-                textRef.current.blur();
-            });
+                    // recarregar os posts
+                    setComment(editedText.textContent);
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    alert("Não foi possível editar o post!");
+                    setEdition(false);
+                    editedText.textContent = comment;
+                    textRef.current.blur();
+                });
         }
-    }
+    };
 
     const focusEdition = (event) => {
         // console.log(textRef.current.value)
         textRef.current.focus();
 
-    
-        if(editedText !== "" && edition){
-            setEdition(false)
-            editedText.textContent=comment
+
+        if (editedText !== "" && edition) {
+            setEdition(false);
+            editedText.textContent = comment;
             textRef.current.blur();
-        }else {
+        } else {
             setEdition(true);
             textRef.current.focus();
         }
-    }
+    };
 
-    function openModal(){
-        setOpenedModal(true)
-        console.log("TENTEI ABRIR MODAL: ", openedDeleteModal)
-    }   
+    function openModal() {
+        setOpenedModal(true);
+        console.log("TENTEI ABRIR MODAL: ", openedDeleteModal);
+    }
 
 
 
     return (
         <Container >
-            <UserImage />
+            <UserImage src={userImage} />
             <Form>
-                <UserName><Link to={`/user/-inserirIdAqui-`}>Juvenal Juvêncio </Link>
-                    <EditionButton onClick={(event) => focusEdition(event)}/>
+                <UserName><Link to={`/user/${userId}`}>{userName} </Link>
+                    <EditionButton onClick={(event) => focusEdition(event)} />
                     <DeleteButton onClick={openModal}></DeleteButton>
-                    <ModalPage 
+                    <ModalPage
                         openedDeleteModal={openedDeleteModal}
                         setOpenedModal={setOpenedModal}
                         setLoading={setLoading}
@@ -93,8 +94,8 @@ export default function PostCard({commentText}) {
                     <ModalLoadingPage loading={loading}></ModalLoadingPage>
                 </UserName>
 
-                <Comment ref={textRef} 
-                    contentEditable={edition} 
+                <Comment ref={textRef}
+                    contentEditable={edition}
                     onInput={(e) => setEditedText(e.currentTarget)}
                     isEditing={edition}
                     onKeyDown={(event) => handleEdition(event)}
@@ -106,23 +107,23 @@ export default function PostCard({commentText}) {
                 <PostContainer>
                     <div>
                         <PostTitle>
-                            Como aplicar o Material UI em um
-                            projeto React
+                            {title}
                         </PostTitle>
 
                         <PostComment>
-                            Hey! I have moved this tutorial to my personal blog. Same content, new location. Sorry about making you click through to another page.
+                            {description}
                         </PostComment>
 
                         <LinkPost>
-                            https://medium.com/@pshrmn/a-simple-react-router
+                            {link}
                         </LinkPost>
                     </div>
 
-                    <ImagePost />
+                    <ImagePost src={image} />
 
                 </PostContainer>
             </Form>
+            <Like post_id={id} likes={likes} />
         </Container>
     );
 }
@@ -135,7 +136,7 @@ const EditionButton = styled(HiPencil)`
     top: 0;
     right: 35px;
     bottom: 1000px;
-`
+`;
 
 const DeleteButton = styled(HiArchiveBoxXMark)`
     width: 20px;
@@ -145,7 +146,7 @@ const DeleteButton = styled(HiArchiveBoxXMark)`
     top: 0;
     right: 5px;
     bottom: 1000px;
-`
+`;
 
 const Form = styled.form`
     width: 300px;
@@ -187,7 +188,10 @@ const PostContainer = styled.div`
 
     div{
         box-sizing: border-box;
-        padding-left: 15px;
+        padding:24px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 `;
 const PostTitle = styled.p`

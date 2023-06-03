@@ -4,7 +4,7 @@ import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import Header from "../../components/Header.jsx";
 import PostCard from "../../components/Cards/PostCard.jsx";
-import { Container, UserTitle } from "./style.jsx";
+import { Container, ContentContainer, PostsContainer, UserTitle } from "./style.jsx";
 import Hashtags from "../../components/Hashtags/index.jsx";
 
 export default function User() {
@@ -29,23 +29,27 @@ export default function User() {
           <img src={user.image} alt="" />
           <h1><span>{user.name}</span>`s posts</h1>
         </UserTitle> : ""}
-        <div>
-          <div>
+        <ContentContainer>
+          <PostsContainer>
             {user.posts?.map(post =>
               <PostCard
                 key={post.id}
+                id={post.id}
                 userId={user.id}
                 userName={user.name}
                 userImage={user.image}
-                comment={post.description}
+                image={post.image}
+                title={post.title}
+                comment={post.comment}
                 link={post.link}
-                like={post.likes}
+                likes={post.likes}
+                description={post.description}
                 hashtags={post.hashtags}
               />
             )}
-          </div>
+          </PostsContainer>
           <Hashtags />
-        </div>
+        </ContentContainer>
       </Container>
     </>
   );

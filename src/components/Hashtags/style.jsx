@@ -11,11 +11,16 @@ export const Container = styled.div`
     margin: 22px 16px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    font-family: 'Lato';    
+    font-family: 'Lato';
     font-weight: 700;
     font-size: 19px;
-    color:#FFFFFF
+    color:#FFFFFF;
+    a~a{
+      margin-top: 11px;
+    }
+  }
+  @media (width <= 937px) {
+    display: none;
   }
 `;
 
