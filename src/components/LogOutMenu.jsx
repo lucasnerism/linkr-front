@@ -15,15 +15,18 @@ export default function MenuLogout() {
         .then(() => {
             localStorage.clear()
             setLocalToken({})
-          //  navigate("/") redireciona pra loginPage
+           navigate("/")
 
+        })
+        .catch(err => {
+            console.log(err.response)
         })
         console.log("O backend ainda será implementado :D")
     }
     return (
         <>
-            <ul>
-                <Option open={isMenuOpen} onClick={handleLogOut} >Logout</Option>
+            <ul data-test="menu" >
+                <Option open={isMenuOpen} onClick={handleLogOut} data-test="logout" >Logout</Option>
             </ul>
         </>
     )

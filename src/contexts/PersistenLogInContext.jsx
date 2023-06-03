@@ -10,10 +10,10 @@ export default function LogInProvider({ children }) {
 
     useEffect(() => {
         if(localUser === null){
-            navigate("/")
+         navigate("/")
         }
         else{
-          //  navigate("/home")
+            navigate("/timeline")
         }
     }, [])
 
