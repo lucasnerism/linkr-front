@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { LogOutContext } from "../contexts/MenuContext";
+import api from "../services/api";
+import { LogInContext } from "../contexts/PersistenLogInContext";
+import { useNavigate } from "react-router-dom";
 
 export default function MenuLogout() {
     const { isMenuOpen } = useContext(LogOutContext)
+    const {setLocalToken} = useContext(LogInContext)
+    const navigate = useNavigate()
 
     function handleLogOut(){
+        api.logOutUser()
+        .then(() => {
+            localStorage.clear()
+            setLocalToken({})
+          //  navigate("/") redireciona pra loginPage
+
+        })
         console.log("O backend ainda será implementado :D")
     }
     return (

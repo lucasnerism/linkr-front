@@ -1,28 +1,52 @@
 import { useParams } from "react-router-dom";
-import SearchBar from "../../components/SearchBar/index.jsx";
 import { useEffect, useState, useContext } from "react";
 import api from "../../services/api.js";
+import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
+import Header from "../../components/Header.jsx";
+import PostCard from "../../components/Cards/PostCard.jsx";
+import { Container, UserTitle } from "./style.jsx";
+import Hashtags from "../../components/Hashtags/index.jsx";
 
 export default function User() {
   const { id } = useParams();
-  const [user, setUser] = useState({});
-  // const { token } = useContext();
-  const token = "";
+  const [user, setUser] = useState("");
+  const { localToken } = useContext(LogInContext);
+
 
   useEffect(() => {
-    api.getUserById(id)
+    api.getUserById(id, localToken.token)
       .then(res => {
         setUser(res.data);
       })
-      .catch(err => console.log(err?.response.data));
+      .catch(err => console.log(err?.response?.data));
   }, []);
 
   return (
     <>
-      {/* {
-        { user.name }
-        {user.posts?.map(post => <post></post>)}      
-      } */}
+      <Header />
+      <Container>
+        {user ? <UserTitle>
+          <img src={user.image} alt="" />
+          <h1><span>{user.name}</span>`s posts</h1>
+        </UserTitle> : ""}
+        <div>
+          <div>
+            {user.posts?.map(post =>
+              <PostCard
+                key={post.id}
+                userId={user.id}
+                userName={user.name}
+                userImage={user.image}
+                comment={post.description}
+                link={post.link}
+                like={post.likes}
+                hashtags={post.hashtags}
+              />
+            )}
+          </div>
+          <Hashtags />
+        </div>
+      </Container>
     </>
   );
 }
