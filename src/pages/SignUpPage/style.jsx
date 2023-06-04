@@ -36,9 +36,10 @@ font-weight: 700;
 font-size: 43px;
 line-height: 64px;
 color: #FFFFFF;
-width: 442px;
+width: 40%;
 margin-top: 0px;
 margin-left: 144px;
+word-wrap:break-word ;
 }
 `
 export const Rigth = styled.div`
@@ -50,6 +51,7 @@ align-items: center;
 justify-content: center;
 form{
     width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +59,7 @@ form{
 }
 input{
 box-sizing: border-box;
-width: 429px;
+width: 80%;
 height: 65px;
 margin-bottom: 13px;
 padding-left: 17px;
@@ -74,7 +76,7 @@ color: #9F9F9F;
 }
 button{
 box-sizing: border-box;
-width: 429px;
+width: 80%;
 height: 65px;
 background: #1877F2;
 border-radius: 6px;
