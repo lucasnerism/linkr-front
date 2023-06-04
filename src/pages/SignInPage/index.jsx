@@ -48,6 +48,7 @@ export default function SignInPage(){
             <Rigth>
                 <form onSubmit={handleSubmit}>
                 <input
+                data-test="email"
                 placeholder="e-mail"
                 type="email"
                 name="email"
@@ -57,6 +58,7 @@ export default function SignInPage(){
                 </input>
 
                 <input
+                data-test="password"
                 placeholder="password"
                 type="password"
                 name="password"
@@ -65,10 +67,10 @@ export default function SignInPage(){
                 required>
                 </input>
 
-                <button disabled={loading} type="submit">Log In</button>
+                <button data-test="login-btn" disabled={loading} type="submit">Log In</button>
                 </form>
 
-                <CustomLink to="/sign-up">First time? Create an account!</CustomLink>
+                <CustomLink data-test="sign-up-link" to="/sign-up">First time? Create an account!</CustomLink>
             </Rigth>
 
         </PageContainer>
