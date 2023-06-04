@@ -7,18 +7,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function MenuLogout() {
     const { isMenuOpen } = useContext(LogOutContext)
-    const {setLocalToken} = useContext(LogInContext)
+    const {localToken, setLocalToken} = useContext(LogInContext)
     const navigate = useNavigate()
 
     function handleLogOut(){
-        api.logOutUser()
+        api.logOutUser(localToken.token)
         .then(() => {
             localStorage.clear()
             setLocalToken({})
-          //  navigate("/") redireciona pra loginPage
-
+            navigate('/')
         })
-        console.log("O backend ainda será implementado :D")
+        .catch((err) => {
+            console.log(err)
+        })
     }
     return (
         <>

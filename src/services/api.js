@@ -40,8 +40,8 @@ const editPostComment = (body, token) => {
   return axiosInstance.put(`/user/post`, body, createHeader(token));
 };
 
-const deletePost = (id, token) => {
-  return axiosInstance.delete(`/post/${id}`, createHeader(token));
+const deletePost = (postId, token) => {
+  return axiosInstance.delete(`/post/${postId}`, createHeader(token));
 };
 
 const getTrending = (token) => {
@@ -56,6 +56,10 @@ const dislikePost = (id, token) => {
   return axiosInstance.post(`/post/${id}/dislike`, {}, createHeader(token));
 };
 
+const getPosts = (token) => {
+  return axiosInstance.get(`/posts`, createHeader(token));
+};
+
 export default {
   searchUsers,
   getUserById,
@@ -66,5 +70,6 @@ export default {
   deletePost,
   getTrending,
   likePost,
-  dislikePost
+  dislikePost,
+  getPosts
 };

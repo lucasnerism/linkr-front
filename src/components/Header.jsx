@@ -4,22 +4,35 @@ import { useContext } from "react";
 import { LogOutContext } from "../contexts/MenuContext";
 import MenuLogout from "./LogOutMenu";
 import SearchBar from "./SearchBar/index.jsx";
+import { Link } from "react-router-dom";
+import { LogInContext } from "../contexts/PersistenLogInContext";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Header() {
+
+    const { localToken } = useContext(LogInContext);
     const { isMenuOpen, setIsMenuOpen } = useContext(LogOutContext);
+    const navigate = useNavigate();
+
     function handleOutsideClick() {
         if (isMenuOpen) setIsMenuOpen(false);
     }
+
+    function goToUserPage (){
+        // navigate(`user/${localToken.id}`)
+    }
+
     return (
         <>
             <HeaderComponent onClick={handleOutsideClick} >
-                <h1>
+                <LogoName to={'/timeline'}>
                     linkr
-                </h1>
+                </LogoName>
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
                     {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCLZbvW_h9rxKib4hxDxnuMJARuMyi3dSDGhTi36mbNw&s" alt="profile" />
+                    <img src={`${localToken.img}`} alt="profile" onClick={goToUserPage}/>
                 </div>
             </HeaderComponent>
             <MenuLogout />
@@ -28,6 +41,12 @@ export default function Header() {
     );
 
 }
+const LogoName = styled(Link)`
+    font-size: 30px;
+    margin-left: 30px;
+    color: white;
+    font-weight: 700;
+`
 
 const HeaderComponent = styled.header`
     width: 100%;
