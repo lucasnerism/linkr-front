@@ -16,7 +16,6 @@ export default function FormCard({ reloadTimeline, setReloadTimeline }) {
 
     function createNewPost(e) {
         e.preventDefault();
-        const arr = [...timelinePosts];
 
         setLoading(true);
         const body = { link, comment };
