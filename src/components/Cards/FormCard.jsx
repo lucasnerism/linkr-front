@@ -1,18 +1,47 @@
 import styled from "styled-components";
 import { Container } from "./styled/Container.jsx";
 import { UserImage } from "./styled/UserImage.jsx"
+import { useContext } from "react";
+import React from "react"
+import api from "../../services/api.js";
+import { LogInContext } from "../../contexts/PersistenLogInContext";
+import ModalLoadingPage from "../LoadingModal/index.jsx";
 
 export default function FormCard() {
+
+    const [link, setLink] = React.useState("")
+    const [comment, setComment] = React.useState("");
+    const { localToken, setLocalToken } = useContext(LogInContext);
+    const [loading, setLoading] = React.useState(false);
+
+    function createNewPost(e) {
+        e.preventDefault();
+        
+        setLoading(true)
+        const body = {link, comment}
+        api.createPost(body, localToken.token)
+        .then((response) => {
+            console.log(response.data);
+            setLoading(false)
+            window.location.reload();
+        })
+        .catch((error) => {
+            setLoading(false)
+            alert("Não foi possível criar o post!");
+        });
+    }
+
     return (
         <Container color="white">
             <UserImage/>
-            <Form>
+            <Form onSubmit={createNewPost}>
                 <Title>What are you going to share today?</Title>
-                <Input placeholder="http://" />
-                <TextArea placeholder="Awesome article about #javascript" />
-                <Button>Publish</Button>
+                <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" />
+                <TextArea onInput={(e) => setComment(e.target.value)} placeholder="Awesome article about #javascript" />
+                <Button type="submit">Publish</Button>
+                
             </Form>
-
+            <ModalLoadingPage loading={loading}></ModalLoadingPage>
         </Container>
     );
 }

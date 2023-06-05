@@ -7,7 +7,7 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 
 
-export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading, postId,}) {
+export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading, postId}) {
   const { localToken } = useContext(LogInContext);
 
   function closeModal() {
@@ -16,7 +16,7 @@ export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading
 
   function deletePost () {
     setLoading(true);
-    api.deletePost(postId, localToken)
+    api.deletePost(postId, localToken.token)
     .then((response) => {
       console.log(response.data);
       setLoading(false);
