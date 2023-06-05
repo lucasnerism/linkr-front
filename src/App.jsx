@@ -3,7 +3,6 @@ import Home from "./pages/HomePage";
 import User from "./pages/UserPage/index.jsx";
 import LogOutProvider from "./contexts/MenuContext";
 import LogInProvider from "./contexts/PersistenLogInContext";
-
 import SignUpPage from "./pages/SignUpPage/index.jsx";
 import SignInPage from "./pages/SignInPage/index.jsx";
 import HashtagsPage from "./pages/HashtagPage";

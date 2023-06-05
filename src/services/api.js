@@ -78,4 +78,5 @@ export default {
   dislikePost,
   getPosts,
   createPost
+
 };
