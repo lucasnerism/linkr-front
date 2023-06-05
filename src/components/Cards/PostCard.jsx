@@ -37,7 +37,10 @@ export default function PostCard(props) {
             // Faça uma requisicao axios
             setEdition(false);
             setLoading(true);
-            api.editPostComment(editedText.textContent, localToken)
+
+            const body = {newComment: editedText.textContent}
+
+            api.editPostComment(body, postId, localToken.token)
                 .then((response) => {
                     console.log(response.data);
                     setLoading(false);

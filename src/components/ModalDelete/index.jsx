@@ -7,7 +7,7 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 
 
-export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading, postId,}) {
+export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading, postId}) {
   const { localToken } = useContext(LogInContext);
 
   function closeModal() {

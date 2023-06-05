@@ -36,12 +36,12 @@ const logOutUser = (token) => {
   return axiosInstance.delete('/sign-out', createHeader(token));
 };
 
-const editPostComment = (body, token) => {
-  return axiosInstance.put(`/user/post`, body, createHeader(token));
+const editPostComment = (body, postId, token) => {
+  return axiosInstance.put(`/posts/${postId}`, body, createHeader(token));
 };
 
 const deletePost = (postId, token) => {
-  return axiosInstance.delete(`/post/${postId}`, createHeader(token));
+  return axiosInstance.delete(`/posts/${postId}`, createHeader(token));
 };
 
 const getTrending = (token) => {
@@ -60,6 +60,11 @@ const getPosts = (token) => {
   return axiosInstance.get(`/posts`, createHeader(token));
 };
 
+const createPost = (body, token) => {
+  const promise = axiosInstance.post(`/posts`, body, createHeader(token));
+  return promise;
+};
+
 export default {
   searchUsers,
   getUserById,
@@ -71,5 +76,6 @@ export default {
   getTrending,
   likePost,
   dislikePost,
-  getPosts
+  getPosts,
+  createPost
 };

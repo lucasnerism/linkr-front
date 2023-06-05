@@ -46,7 +46,6 @@ export default function Home() {
                             commentText={post.commentText}
                         ></PostCard>
                     )
-                    
                 })}
             </Container>
         </>
