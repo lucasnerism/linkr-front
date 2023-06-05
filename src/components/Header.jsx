@@ -19,7 +19,7 @@ export default function Header() {
         if (isMenuOpen) setIsMenuOpen(false);
     }
 
-    function goToUserPage (){
+    function goToUserPage() {
         // navigate(`user/${localToken.id}`)
     }
 
@@ -32,7 +32,7 @@ export default function Header() {
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
                     {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
-                    <img data-test="avatar"  src={`${localToken.img}`} alt="profile" onClick={goToUserPage}/>
+                    <img data-test="avatar" src={`${localToken.img}`} alt="profile" onClick={goToUserPage} />
 
                 </div>
             </HeaderComponent>
@@ -47,7 +47,7 @@ const LogoName = styled(Link)`
     margin-left: 30px;
     color: white;
     font-weight: 700;
-`
+`;
 
 const HeaderComponent = styled.header`
     width: 100%;

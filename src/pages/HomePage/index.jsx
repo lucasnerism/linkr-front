@@ -1,37 +1,37 @@
-import styled from "styled-components"
-import CardForm from "../../components/Cards/FormCard"
-import PostCard from "../../components/Cards/PostCard"
-import Header from "../../components/Header"
-import React, { useContext, useEffect, useState } from "react"
-import api from "../../services/api"
-import { LogInContext } from "../../contexts/PersistenLogInContext"
+import styled from "styled-components";
+import CardForm from "../../components/Cards/FormCard";
+import PostCard from "../../components/Cards/PostCard";
+import Header from "../../components/Header";
+import React, { useContext, useEffect, useState } from "react";
+import api from "../../services/api";
+import { LogInContext } from "../../contexts/PersistenLogInContext";
 
 export default function Home() {
-
     const { localToken } = useContext(LogInContext);
-    const [timelinePosts, setTimelinePosts] = React.useState([])
+    const [timelinePosts, setTimelinePosts] = React.useState([]);
 
 
     useEffect(() => {
-        api.getPosts( localToken.token)
-      .then(res => {
-        console.log(res.data)
-        setTimelinePosts(res.data)
-    })
-      .catch(err => console.log(err?.response?.data));
-    }, [])
+        api.getPosts(localToken.token)
+            .then(res => {
+                console.log(res.data);
+                setTimelinePosts(res.data);
+            })
+            .catch(err => console.log(err?.response?.data));
+    }, []);
 
-    console.log(localToken)
+    console.log(localToken);
 
     return (
         <>
-        <Header />
+            <Header />
             <Container>
                 <h1>timeline</h1>
                 <CardForm />
                 {timelinePosts?.map((post) => {
                     return (
                         <PostCard
+                            key={post.id}
                             id={post.id}
                             userId={post.userId}
                             userImage={post.userImage}
@@ -41,16 +41,16 @@ export default function Home() {
                             title={post.title}
                             description={post.description}
                             image={post.image}
-                            hashtag={post.hashtag}
+                            hashtag={post.hashtags}
                             likes={post.likes}
                             commentText={post.commentText}
                         ></PostCard>
-                    )
+                    );
                 })}
             </Container>
         </>
 
-    )
+    );
 }
 
 const Container = styled.div`

@@ -4,11 +4,10 @@ import { IoHeartOutline, IoHeart } from "react-icons/io5";
 import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import api from "../../services/api.js";
 import { Tooltip } from "react-tooltip";
-import { useEffect } from "react";
 
 export default function Like(props) {
   const { localToken: user } = useContext(LogInContext);
-  const [likes, setLikes] = useState(props.likes);
+  const [likes, setLikes] = useState(props.likes ? props.likes : { total: 0, users: [] });
   const [disabled, setDisabled] = useState(false);
 
   const handleLikes = (dislike) => {
@@ -37,8 +36,8 @@ export default function Like(props) {
   };
 
   const getTooltip = () => {
-    const userLiked = likes.users.find(el => el.id === Number(user.id));
-    const filterLikes = userLiked ? likes.users.filter(el => el.id !== Number(user.id)) : "";
+    const userLiked = likes?.users.find(el => el.id === Number(user.id));
+    const filterLikes = userLiked ? likes?.users.filter(el => el.id !== Number(user.id)) : "";
     if (Number(likes.total) === 0) return 'Nenhuma curtida';
     if (Number(likes.total) === 1) return `${userLiked ? "Você" : likes.users[0].name} curtiu`;
     if (Number(likes.total) === 2) return `${userLiked ? `Você e ${filterLikes[0].name}` : `${likes.users[0].name} e ${likes.users[1].name}`} curtiram`;
