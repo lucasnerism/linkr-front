@@ -1,16 +1,19 @@
 import { Container, Title } from "./style.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import api from "../../services/api.js";
+import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 
 export default function Hashtags() {
   const [hashtags, setHashtags] = useState([]);
+  const { localToken } = useContext(LogInContext);
 
   useEffect(() => {
-    //requisição pra api aqui
-    //   .then(res => {
-    //   setHashtags(res.data);
-    // })
-    //     .catch(err => console.log(err?.response?.data));
+    api.getTrending(localToken.token)
+      .then(res => {
+        setHashtags(res.data);
+      })
+      .catch(err => console.log(err?.response?.data));
   }, []);
 
   return (
@@ -19,17 +22,7 @@ export default function Hashtags() {
         trending
       </Title>
       <div>
-        {hashtags?.map((tag, i) => <Link to={`/hashtags/${tag}`} key={i} data-test="hashtag">{`# ${tag}`}</Link>)}
-        <p># grupo11</p>
-        <p># o</p>
-        <p># melhor</p>
-        <p># de</p>
-        <p># todos</p>
-        <p># javascript</p>
-        <p># react</p>
-        <p># node</p>
-        <p># front-end</p>
-        <p># back-end</p>
+        {hashtags?.map((tag, i) => <Link to={`/hashtag/${tag.name}`} key={i} data-test="hashtag">{`# ${tag.name}`}</Link>)}
       </div>
     </Container>
   );

@@ -4,13 +4,20 @@ export const Container = styled.section`
   padding-top: 72px;
   margin: 0 auto;
   width: 937px;
-  &>div{
-    display: flex;
-    justify-content: space-between;
-  }
   @media (width <= 375px) {
     width: 94%;        
   }
+`;
+
+export const PostsContainer = styled.div`
+  @media (width <= 937px) {
+    margin: auto;
+  }
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const UserTitle = styled.title`
