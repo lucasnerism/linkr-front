@@ -32,7 +32,7 @@ export default function Header() {
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
                     {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
-                    <img data-test="avatar" src={`${localToken.img}`} alt="profile" onClick={goToUserPage} />
+                    <img data-test="avatar" src={`${localToken.profile_picture}`} alt="profile" onClick={goToUserPage} />
 
                 </div>
             </HeaderComponent>

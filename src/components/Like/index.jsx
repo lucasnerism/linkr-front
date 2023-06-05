@@ -48,14 +48,15 @@ export default function Like(props) {
   return (
     <Container>
       {likes.users?.find(el => el.id === Number(user.id)) ?
-        <button onClick={() => handleLikes('dislike')} disabled={disabled}><IoHeart className="react-icon liked" /></button>
+        <button data-test="like-btn" onClick={() => handleLikes('dislike')} disabled={disabled}><IoHeart className="react-icon liked" /></button>
         :
-        <button onClick={() => handleLikes()} disabled={disabled}><IoHeartOutline className="react-icon" /></button>}
+        <button data-test="like-btn" onClick={() => handleLikes()} disabled={disabled}><IoHeartOutline className="react-icon" /></button>}
       <p
+        data-test="counter"
         data-tooltip-id="like-tooltip"
         data-tooltip-content={getTooltip()}
       >{`${likes.total} likes`}</p>
-      <Tooltip id="like-tooltip" place="bottom" />
+      <Tooltip data-test="tooltip" id="like-tooltip" place="bottom" />
     </Container>
   );
 }

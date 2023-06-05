@@ -28,7 +28,7 @@ export default function Home() {
             <Container>
                 <h1>timeline</h1>
                 <CardForm />
-                {timelinePosts?.map((post) => {
+                {timelinePosts.length !== 0 ? timelinePosts?.map((post) => {
                     return (
                         <PostCard
                             key={post.id}
@@ -46,7 +46,7 @@ export default function Home() {
                             commentText={post.commentText}
                         ></PostCard>
                     );
-                })}
+                }) : <p data-test="message">There are no posts yet</p>}
             </Container>
         </>
 
