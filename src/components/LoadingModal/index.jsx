@@ -7,7 +7,7 @@ import { Oval } from 'react-loader-spinner'
 export default function ModalLoadingPage({ loading }) {
 
   return (
-    <ModalContainer>
+    <ModalContainer loading={loading}>
         <ModalLoading
           isOpen={loading}
           contentLabel="Are you sure you want to delete this post?"
@@ -59,7 +59,7 @@ const ModalContainer = styled.div`
   
     width: 100%;
     height: 100%;
-    display: flex;
+    display: ${(props) => props.loading ? "flex" : "none"};
     justify-content: center;
     align-items: center;
     text-align: center;

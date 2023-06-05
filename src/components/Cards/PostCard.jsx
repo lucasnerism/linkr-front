@@ -3,7 +3,7 @@ import { Container } from "./styled/Container.jsx";
 import { Link } from "react-router-dom";
 import { UserImage } from "./styled/UserImage.jsx";
 import { editPostComment } from "../../services/api.js";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiPencil } from "react-icons/hi";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import ModalPage from "../ModalDelete/index.jsx";
@@ -23,6 +23,7 @@ export default function PostCard(props) {
     const [loading, setLoading] = React.useState(false);
     const [postId, setPostId] = React.useState(id);
     const { localToken } = useContext(LogInContext);
+    const [imageUserId, setImageUserId] = useState(userId)
 
     const handleEdition = (event) => {
         if (editedText !== "" && edition && event.keyCode == 27) {
@@ -36,7 +37,10 @@ export default function PostCard(props) {
             // Faça uma requisicao axios
             setEdition(false);
             setLoading(true);
-            api.editPostComment(editedText.textContent, localToken)
+
+            const body = {newComment: editedText.textContent}
+
+            api.editPostComment(body, postId, localToken.token)
                 .then((response) => {
                     console.log(response.data);
                     setLoading(false);
@@ -73,7 +77,6 @@ export default function PostCard(props) {
 
     function openModal() {
         setOpenedModal(true);
-        console.log("TENTEI ABRIR MODAL: ", openedDeleteModal);
     }
 
 
@@ -83,8 +86,8 @@ export default function PostCard(props) {
             <UserImage src={userImage} />
             <Form>
                 <UserName><Link to={`/user/${userId}`}>{userName} </Link>
-                    <EditionButton onClick={(event) => focusEdition(event)} />
-                    <DeleteButton onClick={openModal}></DeleteButton>
+                    <EditionButton canEdit={imageUserId===localToken.id} onClick={(event) => focusEdition(event)} />
+                    <DeleteButton canDelete={imageUserId===localToken.id} onClick={openModal}></DeleteButton>
                     <ModalPage
                         openedDeleteModal={openedDeleteModal}
                         setOpenedModal={setOpenedModal}
@@ -136,6 +139,8 @@ const EditionButton = styled(HiPencil)`
     top: 0;
     right: 35px;
     bottom: 1000px;
+    opacity: ${(props) => props.canEdit ? "1" : "0"};
+
 `;
 
 const DeleteButton = styled(HiArchiveBoxXMark)`
@@ -146,6 +151,8 @@ const DeleteButton = styled(HiArchiveBoxXMark)`
     top: 0;
     right: 5px;
     bottom: 1000px;
+    opacity: ${(props) => props.canDelete ? "1" : "0"};
+
 `;
 
 const Form = styled.form`

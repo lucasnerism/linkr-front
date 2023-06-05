@@ -48,7 +48,7 @@ export default function Like(props) {
 
   return (
     <Container>
-      {likes.users.find(el => el.id === Number(user.id)) ?
+      {likes.users?.find(el => el.id === Number(user.id)) ?
         <button onClick={() => handleLikes('dislike')} disabled={disabled}><IoHeart className="react-icon liked" /></button>
         :
         <button onClick={() => handleLikes()} disabled={disabled}><IoHeartOutline className="react-icon" /></button>}

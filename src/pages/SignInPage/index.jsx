@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { useContext, useState } from "react";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import { useNavigate } from "react-router-dom";
+import ModalLoadingPage from "../../components/LoadingModal";
 
 export default function SignInPage() {
   const { localToken, setLocalToken } = useContext(LogInContext);
@@ -34,11 +35,15 @@ export default function SignInPage() {
       if (error.response.status === 404 || error.response.satus === 401) {
         alert('Verifique se os dados foram preenchidos corretamente');
       }
+    
+    })
+  }
 
 
   return (
     <PageContainer>
       <Left>
+        <ModalLoadingPage loading={loading}></ModalLoadingPage>
         <h1>linkr</h1>
         <h2>save, share and discover the best links on the web</h2>
       </Left>
