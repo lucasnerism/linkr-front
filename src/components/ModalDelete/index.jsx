@@ -68,8 +68,8 @@ export default function ModalPage({openedDeleteModal, setOpenedModal, setLoading
           <ModalText>
             <h2>Are you sure you want to delete this?</h2>
             <ConfirmOptions>
-              <No onClick={closeModal}>No, go back</No>
-              <Yes onClick={deletePost}>Yes, delete it</Yes>
+              <No data-test="cancel" onClick={closeModal}>No, go back</No>
+              <Yes data-test="confirm" onClick={deletePost}>Yes, delete it</Yes>
             </ConfirmOptions>
           </ModalText>
         </ModalDelete>
