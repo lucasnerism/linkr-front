@@ -5,6 +5,7 @@ import Header from "../../components/Header"
 import React, { useContext, useEffect, useState } from "react"
 import api from "../../services/api"
 import { LogInContext } from "../../contexts/PersistenLogInContext"
+import Hashtags from "../../components/Hashtags"
 
 export default function Home() {
 
@@ -47,6 +48,7 @@ export default function Home() {
                         ></PostCard>
                     )
                 })}
+                <Hashtags />
             </Container>
         </>
 

@@ -32,7 +32,7 @@ export default function User() {
         <ContentContainer>
           <PostsContainer>
             {user.posts?.map(post => {
-              if(post.userId===localToken.id) {
+             if(post.userId===localToken.id) {
                 return (
                   <PostCard
                     key={post.id}
@@ -50,7 +50,6 @@ export default function User() {
                   />
                 )
               }
-              
           })}
           </PostsContainer>
           <Hashtags />

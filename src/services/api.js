@@ -64,6 +64,9 @@ const createPost = (body, token) => {
   const promise = axiosInstance.post(`/posts`, body, createHeader(token));
   return promise;
 };
+const getPostsByHashtag = (tag, token) => {
+  return axiosInstance.get(`/hashtag/${tag}`, createHeader(token));
+};
 
 export default {
   searchUsers,
@@ -77,6 +80,6 @@ export default {
   likePost,
   dislikePost,
   getPosts,
-  createPost
-
+  createPost,
+  getPostsByHashtag
 };

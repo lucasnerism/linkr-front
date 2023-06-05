@@ -20,7 +20,7 @@ export default function Header() {
     }
 
     function goToUserPage (){
-        // navigate(`user/${localToken.id}`)
+        navigate(`user/${localToken.id}`)
     }
 
     return (
@@ -31,7 +31,7 @@ export default function Header() {
                 </LogoName>
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
-                    {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
+                    {isMenuOpen ? <ArrowUp onClick={() => setIsMenuOpen(!isMenuOpen)}/> : <ArrowDown onClick={() => setIsMenuOpen(!isMenuOpen)}/>}
                     <img data-test="avatar"  src={`${localToken.img}`} alt="profile" onClick={goToUserPage}/>
 
                 </div>
