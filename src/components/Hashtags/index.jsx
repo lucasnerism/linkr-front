@@ -22,7 +22,7 @@ export default function Hashtags() {
         trending
       </Title>
       <div>
-        {hashtags?.map((tag, i) => <Link to={`/hashtag/${tag.name}`} key={i} data-test="hashtag">{`# ${tag.name}`}</Link>)}
+        {hashtags?.map((tag, i) => <Link to={`/hashtags/${tag.name}`} key={i} data-test="hashtag">{`# ${tag.name}`}</Link>)}
       </div>
     </Container>
   );
