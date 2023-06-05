@@ -1,45 +1,44 @@
 import styled from "styled-components";
 import { Container } from "./styled/Container.jsx";
-import { UserImage } from "./styled/UserImage.jsx"
+import { UserImage } from "./styled/UserImage.jsx";
 import { useContext } from "react";
-import React from "react"
+import React from "react";
 import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import ModalLoadingPage from "../LoadingModal/index.jsx";
 
-export default function FormCard() {
+export default function FormCard({ reloadTimeline, setReloadTimeline }) {
 
-    const [link, setLink] = React.useState("")
+    const [link, setLink] = React.useState("");
     const [comment, setComment] = React.useState("");
     const { localToken, setLocalToken } = useContext(LogInContext);
     const [loading, setLoading] = React.useState(false);
 
     function createNewPost(e) {
         e.preventDefault();
-        
-        setLoading(true)
-        const body = {link, comment}
+
+        setLoading(true);
+        const body = { link, comment };
         api.createPost(body, localToken.token)
-        .then((response) => {
-            console.log(response.data);
-            setLoading(false)
-            window.location.reload();
-        })
-        .catch((error) => {
-            setLoading(false)
-            alert("Não foi possível criar o post!");
-        });
+            .then((response) => {
+                setLoading(false);
+                setReloadTimeline(!reloadTimeline);
+            })
+            .catch((error) => {
+                setLoading(false);
+                alert("There was an error publishing your link");
+            });
     }
 
     return (
-        <Container color="white">
-            <UserImage/>
+        <Container color="white" data-test="publish-box">
+            <UserImage src={localToken.profile_picture} />
             <Form onSubmit={createNewPost}>
                 <Title>What are you going to share today?</Title>
-                <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" />
-                <TextArea onInput={(e) => setComment(e.target.value)} placeholder="Awesome article about #javascript" />
-                <Button type="submit">Publish</Button>
-                
+                <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" data-test="link" required />
+                <TextArea onInput={(e) => setComment(e.target.value)} placeholder="Awesome article about #javascript" data-test="description" />
+                <Button type="submit" data-test="publish-btn" disabled={loading}>Publish</Button>
+
             </Form>
             <ModalLoadingPage loading={loading}></ModalLoadingPage>
         </Container>
@@ -49,7 +48,7 @@ export default function FormCard() {
 const Form = styled.form`
     width: 300px;
     margin-left: 15px;
-`
+`;
 const Title = styled.p`
     font-family: 'Lato';
     font-style: normal;
@@ -57,7 +56,7 @@ const Title = styled.p`
     font-size: 20px;
     line-height: 24px;
     color: #707070;
-`
+`;
 const Input = styled.input`
     width: 503px;
     height: 30px;
@@ -78,7 +77,7 @@ const Input = styled.input`
     :focus{
         outline: #EFEFEF;
     }
-`
+`;
 const TextArea = styled.textarea`
     width: 502px;
     height: 66px;
@@ -99,7 +98,7 @@ const TextArea = styled.textarea`
     :focus{
         outline: #EFEFEF;
     }
-`
+`;
 const Button = styled.button`
     width: 112px;
     height: 31px;
@@ -115,4 +114,4 @@ const Button = styled.button`
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
-`
+`;

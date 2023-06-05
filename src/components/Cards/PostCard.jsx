@@ -23,7 +23,7 @@ export default function PostCard(props) {
     const [loading, setLoading] = React.useState(false);
     const [postId, setPostId] = React.useState(id);
     const { localToken } = useContext(LogInContext);
-    const [imageUserId, setImageUserId] = useState(userId)
+    const [imageUserId, setImageUserId] = useState(userId);
 
     const handleEdition = (event) => {
         if (editedText !== "" && edition && event.keyCode == 27) {
@@ -38,7 +38,7 @@ export default function PostCard(props) {
             setEdition(false);
             setLoading(true);
 
-            const body = {newComment: editedText.textContent}
+            const body = { newComment: editedText.textContent };
 
             api.editPostComment(body, postId, localToken.token)
                 .then((response) => {
@@ -82,12 +82,12 @@ export default function PostCard(props) {
 
 
     return (
-        <Container >
+        <Container data-test="post" >
             <UserImage src={userImage} />
             <Form>
-                <UserName><Link to={`/user/${userId}`}>{userName} </Link>
-                    <EditionButton canEdit={imageUserId===localToken.id} onClick={(event) => focusEdition(event)} />
-                    <DeleteButton canDelete={imageUserId===localToken.id} onClick={openModal}></DeleteButton>
+                <UserName data-test="username"><Link to={`/user/${userId}`}>{userName} </Link>
+                    <EditionButton data-test="edit-btn" canEdit={imageUserId === localToken.id} onClick={(event) => focusEdition(event)} />
+                    <DeleteButton data-test="delete-btn" canDelete={imageUserId === localToken.id} onClick={openModal}></DeleteButton>
                     <ModalPage
                         openedDeleteModal={openedDeleteModal}
                         setOpenedModal={setOpenedModal}
@@ -102,28 +102,30 @@ export default function PostCard(props) {
                     onInput={(e) => setEditedText(e.currentTarget)}
                     isEditing={edition}
                     onKeyDown={(event) => handleEdition(event)}
+                    data-test={edition ? "edit-input" : "description"}
                 >
                     {comment}
                 </Comment>
 
 
                 <PostContainer>
-                    <div>
-                        <PostTitle>
-                            {title}
-                        </PostTitle>
+                    <a href={link} target="_blank" data-test="link">
+                        <div>
+                            <PostTitle>
+                                {title}
+                            </PostTitle>
 
-                        <PostComment>
-                            {description}
-                        </PostComment>
+                            <PostComment>
+                                {description}
+                            </PostComment>
 
-                        <LinkPost>
-                            {link}
-                        </LinkPost>
-                    </div>
+                            <LinkPost>
+                                {link}
+                            </LinkPost>
+                        </div>
 
-                    <ImagePost src={image} />
-
+                        <ImagePost src={image} />
+                    </a>
                 </PostContainer>
             </Form>
             <Like post_id={id} likes={likes} />
@@ -192,45 +194,56 @@ const PostContainer = styled.div`
     border-radius: 11px;
     display: flex;
     justify-content: space-between;
+    a{
+        width: 503px;
+        height: 155px;
+        display: flex;
+        justify-content: space-between;
 
-    div{
+        div{
         box-sizing: border-box;
         padding:24px 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
+    }
+
+
 `;
 const PostTitle = styled.p`
 
     width: 249.98px;
-    height: 38px;
+    max-height: 38px;
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     color: #CECECE;
+    overflow: hidden;
 `;
 const PostComment = styled.p`
     width: 302.82px;
-    height: 39px;
+    max-height: 39px;
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
     color: #9B9595;
+    overflow: hidden;
 `;
 const LinkPost = styled.p`
     width: 263.19px;
-    height: 13px;
+    max-height: 13px;
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
     color: #CECECE;
+    overflow: hidden;
 `;
 const ImagePost = styled.img`
     width: 153.44px;

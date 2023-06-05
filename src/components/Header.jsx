@@ -47,7 +47,7 @@ const LogoName = styled(Link)`
     margin-left: 30px;
     color: white;
     font-weight: 700;
-`
+`;
 
 const HeaderComponent = styled.header`
     width: 100%;

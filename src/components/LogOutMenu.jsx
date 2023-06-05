@@ -6,21 +6,20 @@ import { LogInContext } from "../contexts/PersistenLogInContext";
 import { useNavigate } from "react-router-dom";
 
 export default function MenuLogout() {
-    const { isMenuOpen } = useContext(LogOutContext)
-    const {localToken, setLocalToken} = useContext(LogInContext)
-    const navigate = useNavigate()
+    const { isMenuOpen } = useContext(LogOutContext);
+    const { localToken, setLocalToken } = useContext(LogInContext);
+    const navigate = useNavigate();
 
-    function handleLogOut(){
+    function handleLogOut() {
         api.logOutUser(localToken.token)
-        .then(() => {
-            console.log("yay")
-            localStorage.removeItem("user")
-            setLocalToken({})
-        })
-        .catch(err => {
-            console.log(err.response)
-            console.log(localToken)
-        })
+            .then(() => {
+                localStorage.removeItem("user");
+                setLocalToken({});
+                navigate('/');
+            })
+            .catch(err => {
+                console.log(err.response);
+            });
     }
     return (
         <>
@@ -28,7 +27,7 @@ export default function MenuLogout() {
                 <Option open={isMenuOpen} onClick={handleLogOut} data-test="logout" >Logout</Option>
             </ul>
         </>
-    )
+    );
 }
 
 const Option = styled.li`
@@ -46,4 +45,4 @@ const Option = styled.li`
     font-family: 'Lato';
     font-weight: 700;
     font-size: 1rem;
-`
+`;
