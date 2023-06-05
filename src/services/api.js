@@ -44,13 +44,27 @@ const deletePost = (id, token) => {
   return axiosInstance.delete(`/post/${id}`, createHeader(token));
 };
 
+const getTrending = (token) => {
+  return axiosInstance.get('/hashtag', createHeader(token));
+};
+
+const likePost = (id, token) => {
+  return axiosInstance.post(`/post/${id}/like`, {}, createHeader(token));
+};
+
+const dislikePost = (id, token) => {
+  return axiosInstance.post(`/post/${id}/dislike`, {}, createHeader(token));
+};
 
 export default {
   searchUsers,
   getUserById,
-  signUp, 
+  signUp,
   signIn,
   logOutUser,
   editPostComment,
-  deletePost
+  deletePost,
+  getTrending,
+  likePost,
+  dislikePost
 };

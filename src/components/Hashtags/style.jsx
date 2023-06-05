@@ -5,17 +5,25 @@ export const Container = styled.div`
   height: 406px;
   background: #171717;
   border-radius: 16px;
+  position: absolute;
+  top: 14.5rem;
+  right: 16rem;
   &>div{
     width: 130px;
     height: 293px;
     margin: 22px 16px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    font-family: 'Lato';    
+    font-family: 'Lato';
     font-weight: 700;
     font-size: 19px;
-    color:#FFFFFF
+    color:#FFFFFF;
+    a~a{
+      margin-top: 11px;
+    }
+  }
+  @media (width <= 937px) {
+    display: none;
   }
 `;
 

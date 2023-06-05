@@ -19,7 +19,7 @@ export default function Header() {
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
                     {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCLZbvW_h9rxKib4hxDxnuMJARuMyi3dSDGhTi36mbNw&s" alt="profile" />
+                    <img data-test="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCLZbvW_h9rxKib4hxDxnuMJARuMyi3dSDGhTi36mbNw&s" alt="profile" />
                 </div>
             </HeaderComponent>
             <MenuLogout />
