@@ -19,8 +19,8 @@ export default function Header() {
         if (isMenuOpen) setIsMenuOpen(false);
     }
 
-    function goToUserPage() {
-        // navigate(`user/${localToken.id}`)
+    function goToUserPage (){
+        navigate(`user/${localToken.id}`)
     }
 
     return (
@@ -31,8 +31,8 @@ export default function Header() {
                 </LogoName>
 
                 <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
-                    {isMenuOpen ? <ArrowUp /> : <ArrowDown />}
-                    <img data-test="avatar" src={`${localToken.profile_picture}`} alt="profile" onClick={goToUserPage} />
+                    {isMenuOpen ? <ArrowUp onClick={() => setIsMenuOpen(!isMenuOpen)}/> : <ArrowDown onClick={() => setIsMenuOpen(!isMenuOpen)}/>}
+                    <img data-test="avatar"  src={`${localToken.img}`} alt="profile" onClick={goToUserPage}/>
 
                 </div>
             </HeaderComponent>
