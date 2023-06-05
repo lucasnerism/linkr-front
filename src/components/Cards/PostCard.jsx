@@ -86,8 +86,8 @@ export default function PostCard(props) {
             <UserImage src={userImage} />
             <Form>
                 <UserName data-test="username"><Link to={`/user/${userId}`}>{userName} </Link>
-                    <EditionButton canEdit={imageUserId === localToken.id} onClick={(event) => focusEdition(event)} />
-                    <DeleteButton canDelete={imageUserId === localToken.id} onClick={openModal}></DeleteButton>
+                    <EditionButton data-test="edit-btn" canEdit={imageUserId === localToken.id} onClick={(event) => focusEdition(event)} />
+                    <DeleteButton data-test="delete-btn" canDelete={imageUserId === localToken.id} onClick={openModal}></DeleteButton>
                     <ModalPage
                         openedDeleteModal={openedDeleteModal}
                         setOpenedModal={setOpenedModal}
@@ -102,7 +102,7 @@ export default function PostCard(props) {
                     onInput={(e) => setEditedText(e.currentTarget)}
                     isEditing={edition}
                     onKeyDown={(event) => handleEdition(event)}
-                    data-test="description"
+                    data-test={edition ? "edit-input" : "description"}
                 >
                     {comment}
                 </Comment>
