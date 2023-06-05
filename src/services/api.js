@@ -56,6 +56,10 @@ const dislikePost = (id, token) => {
   return axiosInstance.post(`/post/${id}/dislike`, {}, createHeader(token));
 };
 
+const getPosts = (token) =>{
+  return axiosInstance.get('/posts', createHeader(token));
+};
+
 export default {
   searchUsers,
   getUserById,
@@ -66,5 +70,6 @@ export default {
   deletePost,
   getTrending,
   likePost,
-  dislikePost
+  dislikePost,
+  getPosts
 };
