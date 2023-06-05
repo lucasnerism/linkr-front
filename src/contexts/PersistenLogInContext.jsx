@@ -5,15 +5,15 @@ export const LogInContext = createContext()
 
 export default function LogInProvider({ children }) {
     const localUser = JSON.parse(localStorage.getItem("user"))
-    const [localToken, setLocalToken] = useState(localUser !== null ? localUser : {})
+    const [localToken, setLocalToken] = useState(localUser !== null ? localUser: {})
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(localUser === null){
-            navigate("/")
+        if(!localUser){
+         navigate("/")
         }
         else{
-          //  navigate("/home")
+         //   navigate("/timeline")
         }
     }, [])
 
