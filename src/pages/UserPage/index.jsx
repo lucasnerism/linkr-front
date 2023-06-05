@@ -32,26 +32,24 @@ export default function User() {
         <ContentContainer>
           <PostsContainer>
             {user.posts?.map(post => {
-              if(post.userId===localToken.id) {
-                return (
-                  <PostCard
-                    key={post.id}
-                    id={post.id}
-                    userId={user.id}
-                    userName={user.name}
-                    userImage={user.image}
-                    image={post.image}
-                    title={post.title}
-                    comment={post.comment}
-                    link={post.link}
-                    likes={post.likes}
-                    description={post.description}
-                    hashtags={post.hashtags}
-                  />
-                )
-              }
-              
-          })}
+
+              return (
+                <PostCard
+                  key={post.id}
+                  id={post.id}
+                  userId={user.id}
+                  userName={user.name}
+                  userImage={user.image}
+                  image={post.image}
+                  title={post.title}
+                  comment={post.comment}
+                  link={post.link}
+                  likes={post.likes}
+                  description={post.description}
+                  hashtags={post.hashtags}
+                />
+              );
+            })}
           </PostsContainer>
           <Hashtags />
         </ContentContainer>

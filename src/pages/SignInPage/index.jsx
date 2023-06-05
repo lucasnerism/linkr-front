@@ -35,10 +35,8 @@ export default function SignInPage() {
       if (error.response.status === 404 || error.response.satus === 401) {
         alert('Verifique se os dados foram preenchidos corretamente');
       }
-    
-    })
+    });
   }
-
 
   return (
     <PageContainer>
@@ -49,31 +47,31 @@ export default function SignInPage() {
       </Left>
       <Rigth>
         <form onSubmit={handleSubmit}>
-        <input
-        data-test="email"
-        placeholder="e-mail"
-        type="email"
-        name="email"
-        onChange={handleChange}
-        value={formData.email}
-        required>
-        </input>
+          <input
+            data-test="email"
+            placeholder="e-mail"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={formData.email}
+            required>
+          </input>
 
-        <input
-        data-test="password"
-        placeholder="password"
-        type="password"
-        name="password"
-        onChange={handleChange}
-        value={formData.password}
-        required>
-        </input>
-  
-       <button data-test="login-btn" disabled={loading} type="submit">Log In</button>
-       </form>
+          <input
+            data-test="password"
+            placeholder="password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            required>
+          </input>
 
-       <CustomLink data-test="sign-up-link" to="/sign-up">First time? Create an account!</CustomLink>
-    </Rigth>
+          <button data-test="login-btn" disabled={loading} type="submit">Log In</button>
+        </form>
+
+        <CustomLink data-test="sign-up-link" to="/sign-up">First time? Create an account!</CustomLink>
+      </Rigth>
 
 
     </PageContainer>
