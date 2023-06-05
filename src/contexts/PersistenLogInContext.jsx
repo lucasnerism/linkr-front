@@ -1,25 +1,26 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const LogInContext = createContext()
+export const LogInContext = createContext();
 
 export default function LogInProvider({ children }) {
-    const localUser = JSON.parse(localStorage.getItem("user"))
-    const [localToken, setLocalToken] = useState(localUser !== null ? localUser: {})
-    const navigate = useNavigate()
+    const localUser = JSON.parse(localStorage.getItem("user"));
+    const [localToken, setLocalToken] = useState(localUser !== null ? localUser : {});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if(!localUser){
-         navigate("/")
+        if (!localUser && window.location.pathname !== "/sign-up") {
+            console.log(window.location.pathname);
+            navigate("/");
         }
-        else{
-         //   navigate("/timeline")
+        if (localUser) {
+            navigate("/timeline");
         }
-    }, [])
+    }, []);
 
     return (
-        <LogInContext.Provider value={{localToken, setLocalToken}}>
+        <LogInContext.Provider value={{ localToken, setLocalToken }}>
             {children}
         </LogInContext.Provider>
-    )
+    );
 }

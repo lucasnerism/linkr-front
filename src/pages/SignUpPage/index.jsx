@@ -21,7 +21,6 @@ export default function SignUpPage() {
 
     const promise = api.signUp({ ...formData });
     promise.then((response) => {
-      console.log(response.data);
       setLoading(false);
       navigate("/");
     });
@@ -85,7 +84,7 @@ export default function SignUpPage() {
         </form>
 
 
-        <CustomLink data-tes="login-link" to="/">Switch back to log in</CustomLink>
+        <CustomLink data-test="login-link" to="/">Switch back to log in</CustomLink>
       </Rigth>
 
     </PageContainer>
