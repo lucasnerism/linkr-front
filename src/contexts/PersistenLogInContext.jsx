@@ -10,7 +10,6 @@ export default function LogInProvider({ children }) {
 
     useEffect(() => {
         if (!localUser && window.location.pathname !== "/sign-up") {
-            console.log(window.location.pathname);
             navigate("/");
         }
         if (localUser) {
