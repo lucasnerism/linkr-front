@@ -32,7 +32,7 @@ export default function SignInPage() {
 
     promise.catch((error) => {
       setLoading(false);
-      if (error.response.status === 404 || error.response.satus === 401) {
+      if (error.response.status === 404 || error.response.status === 401) {
         alert('Verifique se os dados foram preenchidos corretamente');
       }
     });

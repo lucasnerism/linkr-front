@@ -10,6 +10,7 @@ import Hashtags from "../../components/Hashtags/index.jsx";
 export default function Home() {
     const { localToken } = useContext(LogInContext);
     const [timelinePosts, setTimelinePosts] = React.useState([]);
+    const [reloadTimeline, setReloadTimeline] = useState(false);
 
 
     useEffect(() => {
@@ -18,7 +19,7 @@ export default function Home() {
                 setTimelinePosts(res.data);
             })
             .catch(err => console.log(err?.response?.data));
-    }, []);
+    }, [reloadTimeline]);
 
 
 
@@ -29,7 +30,7 @@ export default function Home() {
                 <h1>timeline</h1>
                 <ContentContainer>
                     <div>
-                        <CardForm />
+                        <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} />
                         {timelinePosts.length !== 0 ? timelinePosts?.map((post) => {
                             return (
                                 <PostCard

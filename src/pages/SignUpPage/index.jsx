@@ -50,7 +50,8 @@ export default function SignUpPage() {
             type="email"
             name="email"
             onChange={handleChange}
-            value={formData.email}>
+            value={formData.email}
+            required>
           </input>
 
           <input
@@ -59,7 +60,8 @@ export default function SignUpPage() {
             type="password"
             name="password"
             onChange={handleChange}
-            value={formData.password}>
+            value={formData.password}
+            required>
           </input>
 
           <input
@@ -68,7 +70,8 @@ export default function SignUpPage() {
             type="text"
             name="username"
             onChange={handleChange}
-            value={formData.username}>
+            value={formData.username}
+            required>
           </input>
 
           <input
@@ -77,7 +80,8 @@ export default function SignUpPage() {
             type="text"
             name="profile_picture"
             onChange={handleChange}
-            value={formData.profile_picture}>
+            value={formData.profile_picture}
+            required>
           </input>
 
           <button data-test="sign-up-btn" disabled={loading} type="submit">Sign Up</button>
