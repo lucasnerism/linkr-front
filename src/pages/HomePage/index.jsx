@@ -44,7 +44,7 @@ export default function Home() {
                                     title={post.title}
                                     description={post.description}
                                     image={post.image}
-                                    hashtag={post.hashtags}
+                                    hashtags={post.hashtags}
                                     likes={post.likes}
                                     commentText={post.commentText}
                                 ></PostCard>
