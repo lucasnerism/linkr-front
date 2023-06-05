@@ -104,7 +104,7 @@ export default function PostCard(props) {
                     onKeyDown={(event) => handleEdition(event)}
                     data-test={edition ? "edit-input" : "description"}
                 >
-                    {comment}
+                    {`${comment} `}<span>{hashtags?.map(tag => ` #${tag} `)}</span>
                 </Comment>
 
 
@@ -184,7 +184,10 @@ const Comment = styled.p`
     border-radius: 10px;
     margin: 10px 0px;
     color: #B7B7B7;
-    
+    span{
+        font-weight: 700;
+        color:#FFFFFF
+    }
 `;
 const PostContainer = styled.div`
     box-sizing: border-box;
