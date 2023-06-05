@@ -13,18 +13,19 @@ export default function MenuLogout() {
     function handleLogOut(){
         api.logOutUser(localToken.token)
         .then(() => {
-            localStorage.clear()
+            console.log("yay")
+            localStorage.removeItem("user")
             setLocalToken({})
-            navigate('/')
         })
-        .catch((err) => {
-            console.log(err)
+        .catch(err => {
+            console.log(err.response)
+            console.log(localToken)
         })
     }
     return (
         <>
-            <ul>
-                <Option open={isMenuOpen} onClick={handleLogOut} >Logout</Option>
+            <ul data-test="menu" >
+                <Option open={isMenuOpen} onClick={handleLogOut} data-test="logout" >Logout</Option>
             </ul>
         </>
     )
