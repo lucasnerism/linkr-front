@@ -108,8 +108,8 @@ export default function PostCard(props) {
                 </Comment>
 
 
-                <PostContainer data-test="link">
-                    <a href={link} target="_blank">
+                <PostContainer>
+                    <a href={link} target="_blank" data-test="link">
                         <div>
                             <PostTitle>
                                 {title}

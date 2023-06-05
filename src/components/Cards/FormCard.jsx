@@ -7,7 +7,7 @@ import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import ModalLoadingPage from "../LoadingModal/index.jsx";
 
-export default function FormCard() {
+export default function FormCard({ reloadTimeline, setReloadTimeline }) {
 
     const [link, setLink] = React.useState("");
     const [comment, setComment] = React.useState("");
@@ -16,18 +16,18 @@ export default function FormCard() {
 
     function createNewPost(e) {
         e.preventDefault();
+        const arr = [...timelinePosts];
 
         setLoading(true);
         const body = { link, comment };
         api.createPost(body, localToken.token)
             .then((response) => {
-                console.log(response.data);
                 setLoading(false);
-                window.location.reload();
+                setReloadTimeline(!reloadTimeline);
             })
             .catch((error) => {
                 setLoading(false);
-                alert("Não foi possível criar o post!");
+                alert("There was an error publishing your link");
             });
     }
 
@@ -36,9 +36,9 @@ export default function FormCard() {
             <UserImage src={localToken.profile_picture} />
             <Form onSubmit={createNewPost}>
                 <Title>What are you going to share today?</Title>
-                <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" data-test="link" />
+                <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" data-test="link" required />
                 <TextArea onInput={(e) => setComment(e.target.value)} placeholder="Awesome article about #javascript" data-test="description" />
-                <Button type="submit" data-test="publish-btn">Publish</Button>
+                <Button type="submit" data-test="publish-btn" disabled={loading}>Publish</Button>
 
             </Form>
             <ModalLoadingPage loading={loading}></ModalLoadingPage>
