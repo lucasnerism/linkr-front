@@ -46,6 +46,7 @@ export default function SignUpPage(){
             <Rigth>
                 <form onSubmit={handleSubmit}> 
                 <input
+                data-test="email"
                 placeholder="e-mail"
                 type="email"
                 name="email"
@@ -54,6 +55,7 @@ export default function SignUpPage(){
                 </input>
 
                 <input
+                data-test="password"
                 placeholder="password"
                 type="password"
                 name="password"
@@ -62,6 +64,7 @@ export default function SignUpPage(){
                 </input>
 
                 <input
+                datta-test="username"
                 placeholder="username"
                 type="text"
                 name="username"
@@ -70,6 +73,7 @@ export default function SignUpPage(){
                 </input>
 
                 <input
+                data-test="picture-url"
                 placeholder="picture url"
                 type="text"
                 name="profile_picture"
@@ -77,11 +81,11 @@ export default function SignUpPage(){
                 value={formData.profile_picture}>
                 </input>
 
-                <button disabled={loading} type="submit">Sign Up</button>
+                <button data-test="sign-up-btn" disabled={loading} type="submit">Sign Up</button>
                 </form>
 
 
-                <CustomLink to="/">Switch back to log in</CustomLink>
+                <CustomLink data-tes="login-link" to="/">Switch back to log in</CustomLink>
             </Rigth>
 
         </PageContainer>
