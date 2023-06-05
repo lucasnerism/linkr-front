@@ -33,7 +33,7 @@ export default function FormCard() {
 
     return (
         <Container color="white" data-test="publish-box">
-            <UserImage />
+            <UserImage src={localToken.profile_picture} />
             <Form onSubmit={createNewPost}>
                 <Title>What are you going to share today?</Title>
                 <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" data-test="link" />
