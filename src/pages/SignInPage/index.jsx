@@ -23,9 +23,9 @@ export default function SignInPage() {
 
     const promise = api.signIn({ ...formData });
     promise.then((response) => {
-      const { id, token, profile_picture } = response.data;
-      setLocalToken({ id, token, profile_picture });
-      localStorage.setItem("user", JSON.stringify({ id, token, profile_picture }));
+      const { id, token, profile_picture, followSomeone } = response.data;
+      setLocalToken({ id, token, profile_picture, followSomeone });
+      localStorage.setItem("user", JSON.stringify({ id, token, profile_picture, followSomeone }));
       setLoading(false);
       navigate("/timeline");
     });

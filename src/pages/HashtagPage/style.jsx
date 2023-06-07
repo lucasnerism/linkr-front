@@ -15,7 +15,7 @@ export const Title = styled.h1`
   top: 8rem;
   left: 38rem; 
   margin-bottom: 2.5rem;
-`
+`;
 export const Container = styled.div`
     width: 100vw;
     min-height: 100vh;
@@ -24,9 +24,15 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
-`
+`;
 export const PostContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    margin-top: 14rem;
-`
+    flex-direction: column;    
+`;
+
+export const ContentContainer = styled.div`
+  margin-top: 14rem;
+  width: 931px;
+  display: flex;
+  justify-content: space-between;
+`;

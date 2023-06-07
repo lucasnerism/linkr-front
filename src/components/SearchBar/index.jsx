@@ -48,7 +48,7 @@ export default function SearchBar() {
           <User key={user.id} data-test="user-search">
             <Link to={`/user/${user.id}`}>
               <img src={user.image} alt={user.name} />
-              <p>{user.name}</p>
+              <p>{user.name}<span>{user.following ? " • following" : ""}</span></p>
             </Link>
           </User>
         )}

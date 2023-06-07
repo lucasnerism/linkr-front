@@ -19,8 +19,8 @@ export default function Header() {
         if (isMenuOpen) setIsMenuOpen(false);
     }
 
-    function goToUserPage (){
-        navigate(`user/${localToken.id}`)
+    function goToUserPage() {
+        navigate(`/user/${localToken.id}`);
     }
 
     return (
@@ -30,9 +30,9 @@ export default function Header() {
                     linkr
                 </LogoName>
 
-                <div onClick={() => setIsMenuOpen(!isMenuOpen)} >
-                    {isMenuOpen ? <ArrowUp onClick={() => setIsMenuOpen(!isMenuOpen)}/> : <ArrowDown onClick={() => setIsMenuOpen(!isMenuOpen)}/>}
-                    <img data-test="avatar"  src={`${localToken.img}`} alt="profile" onClick={goToUserPage}/>
+                <div>
+                    {isMenuOpen ? <ArrowUp onClick={() => setIsMenuOpen(!isMenuOpen)} /> : <ArrowDown onClick={() => setIsMenuOpen(!isMenuOpen)} />}
+                    <img data-test="avatar" src={`${localToken.profile_picture}`} alt="profile" onClick={goToUserPage} />
 
                 </div>
             </HeaderComponent>
@@ -77,15 +77,18 @@ const HeaderComponent = styled.header`
         height: 3.3rem;
         border-radius: 50%;
         padding: 0.6rem;
+        cursor: pointer;
     }
 `;
 const ArrowDown = styled(SlArrowDown)`
     width: 1.125rem;
     height: 0.75rem;
-    color: #FFFFFF;   
+    color: #FFFFFF;
+    cursor: pointer;
 `;
 const ArrowUp = styled(SlArrowUp)`
     width: 1.125rem;
     height: 0.75rem;
-    color: #FFFFFF;   
+    color: #FFFFFF;
+    cursor: pointer;
 `;
