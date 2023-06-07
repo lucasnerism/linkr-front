@@ -73,7 +73,7 @@ const createFollow = (id, token) => {
 }
 
 const deleteFollow = (id, token) => {
-  return axiosInstance.delete(`user/follow/:${id}`, createHeader(token))
+  return axiosInstance.delete(`/user/follow/${id}`, createHeader(token))
 }
 
 export default {

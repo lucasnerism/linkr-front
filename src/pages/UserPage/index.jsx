@@ -21,10 +21,13 @@ export default function User() {
       .then(res => {
         setOtherUser(res.data.id === localToken.id)
         setUser(res.data);
+        setCheckFollow(res.data.following)
       })
       .catch(err => console.log(err?.response?.data));
 
   }, []);
+
+  console.log(user)
 
   return (
     <>
@@ -37,6 +40,8 @@ export default function User() {
             id={id}
             otherUser={otherUser}
             localToken={localToken}
+            checkFollow={checkFollow}
+            setCheckFollow={setCheckFollow}
             >
               {checkFollow ? "unfollow" : "follow"}
           </FollowingButton>

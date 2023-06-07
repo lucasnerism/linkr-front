@@ -3,9 +3,7 @@ import React, { useEffect } from "react"
 import api from "../../services/api"
 import { func } from "prop-types"
 
-export default function FollowingButton ({id, localToken, otherUser}) {
-
-    const [checkFollow, setCheckFollow] = React.useState()
+export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow}) {
 
     function handleFollow () {
         if(!checkFollow){
@@ -31,7 +29,7 @@ export default function FollowingButton ({id, localToken, otherUser}) {
     return (
         <FollowingContainer 
             data-test="follow-btn"
-            follow={checkFollow ? true : false} 
+            follow={checkFollow} 
             otherUser={otherUser}
             onClick={handleFollow}
             >
@@ -53,7 +51,7 @@ const FollowingContainer = styled.button`
   
   right: 0;
   opacity: ${(props) => props.otherUser ? "0" : "1"};
-  color: ${(props) => props.follow ? "white" : "#0d77e8"};
-  background-color: ${(props) => props.follow ? "#0d77e8" : "white"};
+  color: ${(props) => props.follow ? "#0d77e8" : "white"};
+  background-color: ${(props) => props.follow ? "white" : "#0d77e8"};
 
 `
