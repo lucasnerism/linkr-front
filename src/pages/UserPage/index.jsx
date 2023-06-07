@@ -45,6 +45,7 @@ export default function User() {
             checkFollow={checkFollow}
             setCheckFollow={setCheckFollow}
             requestBack={requestBack}
+            setRequestBack={setRequestBack}
             >
               {checkFollow ? "unfollow" : "follow"}
           </FollowingButton>

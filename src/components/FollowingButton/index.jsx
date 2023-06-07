@@ -3,24 +3,29 @@ import React, { useEffect } from "react"
 import api from "../../services/api"
 import { func } from "prop-types"
 
-export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow, requestBack}) {
+export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow, requestBack, setRequestBack}) {
 
     function handleFollow () {
+        setRequestBack(true)
         if(!checkFollow){
             api.createFollow(id, localToken.id)
                 .then((res) => {
                     setCheckFollow(true)
+                    setRequestBack(false)
                 })
                 .catch((err) => {
                     console.log(err)
+                    setRequestBack(false)
                 })
         }else {
             api.deleteFollow(id, localToken.id)
                 .then((res) => {
                     setCheckFollow(false)
+                    setRequestBack(false)
                 })
                 .catch((err) => {
                     console.log(err)
+                    setRequestBack(false)
                 })
         }
         
