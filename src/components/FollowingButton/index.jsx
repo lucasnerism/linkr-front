@@ -14,7 +14,7 @@ export default function FollowingButton ({id, localToken, otherUser, checkFollow
                     setRequestBack(false)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    alert(err?.response?.data)
                     setRequestBack(false)
                 })
         }else {
@@ -24,7 +24,7 @@ export default function FollowingButton ({id, localToken, otherUser, checkFollow
                     setRequestBack(false)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    alert(err?.response?.data)
                     setRequestBack(false)
                 })
         }
