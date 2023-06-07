@@ -7,15 +7,21 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 export default function Hashtags() {
   const [hashtags, setHashtags] = useState([]);
   const { localToken } = useContext(LogInContext);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api.getTrending(localToken.token)
       .then(res => {
         setHashtags(res.data);
+        setLoading(false);
       })
-      .catch(err => console.log(err?.response?.data));
+      .catch(err => {
+        console.log(err?.response?.data);
+        setLoading(false);
+      });
   }, []);
-
+  if (loading) return <></>;
   return (
     <Container data-test="trending">
       <Title>

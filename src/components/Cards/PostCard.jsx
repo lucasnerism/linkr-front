@@ -104,7 +104,7 @@ export default function PostCard(props) {
                     onKeyDown={(event) => handleEdition(event)}
                     data-test={edition ? "edit-input" : "description"}
                 >
-                    {`${comment} `}<span>{hashtags?.map(tag => <Link to={`hashtag/${tag}`}>{` #${tag}`}</Link>)}</span>
+                    {`${comment} `}<span>{hashtags?.map(tag => <Link to={`/hashtag/${tag}`}>{` #${tag}`}</Link>)}</span>
                 </Comment>
 
 

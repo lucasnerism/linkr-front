@@ -4,7 +4,7 @@ export const Container = styled.div`
   border-radius: 8px;
   width: 563px;
   background-color: #E7E7E7;
-  position: absolute;
+  position: fixed;
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
@@ -21,10 +21,12 @@ export const Container = styled.div`
       display: none;
     }
   }
-  @media (width <= 375px) {
+  @media (width <= 600px) {
+    position: absolute;
     top: 80px;
     width: 94%;
-    padding: 0 15px;
+    padding: 0 ;
+    margin: auto;
   }
 `;
 
