@@ -63,9 +63,12 @@ export const Button = styled.button`
     width: 21px;
     height: 21px;
   }
+  cursor: pointer;
 `;
 
 export const User = styled.div`
+  font-family: 'Lato';  
+  font-weight: 400;
   a{
     width: 100%;
     display: flex;
@@ -80,6 +83,9 @@ export const User = styled.div`
   p{
     font-size: 19px;
     color: #515151;
+    span{
+      color: #C5C5C5;
+    }
   }
   &~&{
     margin-top: 17px;

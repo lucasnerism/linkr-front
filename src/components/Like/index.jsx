@@ -38,7 +38,7 @@ export default function Like(props) {
   const getTooltip = () => {
     const userLiked = likes?.users.find(el => el.id === Number(user.id));
     const filterLikes = userLiked ? likes?.users.filter(el => el.id !== Number(user.id)) : "";
-    if (Number(likes.total) === 0) return 'Nenhuma curtida';
+    if (Number(likes.total) === 0) return `Nenhuma curtida </span>`;
     if (Number(likes.total) === 1) return `${userLiked ? "Você" : likes.users[0].name} curtiu`;
     if (Number(likes.total) === 2) return `${userLiked ? `Você e ${filterLikes[0].name}` : `${likes.users[0].name} e ${likes.users[1].name}`} curtiram`;
     if (Number(likes.total) === 3) return `${userLiked ? `Você, ${filterLikes[0].name}` : `${likes.users[0].name}, ${likes.users[1].name}`} e outra 1 pessoa curtiram`;
@@ -54,9 +54,9 @@ export default function Like(props) {
       <p
         data-test="counter"
         data-tooltip-id="like-tooltip"
-        data-tooltip-content={getTooltip()}
+        data-tooltip-html={`<span data-test="tooltip">${getTooltip()}</span>`}
       >{`${likes.total} likes`}</p>
-      <Tooltip data-test="tooltip" id="like-tooltip" place="bottom" />
-    </Container>
+      <Tooltip id="like-tooltip" place="bottom" />
+    </Container >
   );
 }

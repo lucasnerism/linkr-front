@@ -31,10 +31,10 @@ export default function Home() {
                 <ContentContainer>
                     <div>
                         <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} />
-                        {timelinePosts.length !== 0 ? timelinePosts?.map((post) => {
+                        {timelinePosts.length !== 0 ? timelinePosts?.map((post, i) => {
                             return (
                                 <PostCard
-                                    key={post.id}
+                                    key={i}
                                     id={post.id}
                                     userId={post.userId}
                                     userImage={post.userImage}
@@ -47,9 +47,10 @@ export default function Home() {
                                     hashtags={post.hashtags}
                                     likes={post.likes}
                                     commentText={post.commentText}
+                                    repost={post.reposted_by}
                                 ></PostCard>
                             );
-                        }) : <p data-test="message">There are no posts yet</p>}
+                        }) : localToken.followSomeone ? <p data-test="message">No posts found from your friends</p> : <p data-test="message">You don't follow anyone yet. Search for new friends!</p>}
                     </div>
                     <Hashtags />
                 </ContentContainer>
