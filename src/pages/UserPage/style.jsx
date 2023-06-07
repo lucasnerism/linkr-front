@@ -7,6 +7,7 @@ export const Container = styled.section`
   @media (width <= 375px) {
     width: 94%;        
   }
+  position: relative;
 `;
 
 export const PostsContainer = styled.div`

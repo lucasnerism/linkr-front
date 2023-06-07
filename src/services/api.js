@@ -68,6 +68,14 @@ const getPostsByHashtag = (tag, token) => {
   return axiosInstance.get(`/hashtag/${tag}`, createHeader(token));
 };
 
+const createFollow = (id, token) => {
+  return axiosInstance.post(`/user/follow/${id}`, createHeader(token))
+}
+
+const deleteFollow = (id, token) => {
+  return axiosInstance.delete(`user/follow/:${id}`, createHeader(token))
+}
+
 export default {
   searchUsers,
   getUserById,
@@ -81,5 +89,7 @@ export default {
   dislikePost,
   getPosts,
   createPost,
-  getPostsByHashtag
+  getPostsByHashtag,
+  createFollow,
+  deleteFollow
 };
