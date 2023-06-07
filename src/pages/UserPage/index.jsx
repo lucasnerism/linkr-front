@@ -15,6 +15,7 @@ export default function User() {
   const { localToken } = useContext(LogInContext);
   const [otherUser, setOtherUser] = React.useState(false)
   const [checkFollow, setCheckFollow] = React.useState();
+  const [requestBack, setRequestBack] = React.useState(true);
 
   useEffect(() => {
     api.getUserById(id, localToken.token)
@@ -22,8 +23,9 @@ export default function User() {
         setOtherUser(res.data.id === localToken.id)
         setUser(res.data);
         setCheckFollow(res.data.following)
+        setRequestBack(false)
       })
-      .catch(err => console.log(err?.response?.data));
+      .catch(err => alert(err?.response?.data));
 
   }, []);
 
@@ -42,6 +44,7 @@ export default function User() {
             localToken={localToken}
             checkFollow={checkFollow}
             setCheckFollow={setCheckFollow}
+            requestBack={requestBack}
             >
               {checkFollow ? "unfollow" : "follow"}
           </FollowingButton>

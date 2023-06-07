@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import api from "../../services/api"
 import { func } from "prop-types"
 
-export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow}) {
+export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow, requestBack}) {
 
     function handleFollow () {
         if(!checkFollow){
@@ -32,6 +32,7 @@ export default function FollowingButton ({id, localToken, otherUser, checkFollow
             follow={checkFollow} 
             otherUser={otherUser}
             onClick={handleFollow}
+            disabled={requestBack}
             >
               {checkFollow ? "unfollow" : "follow"}
           </FollowingContainer>
