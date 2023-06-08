@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import CardForm from "../../components/Cards/FormCard";
 import PostCard from "../../components/Cards/PostCard";
 import Header from "../../components/Header";
@@ -6,11 +5,16 @@ import React, { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import Hashtags from "../../components/Hashtags/index.jsx";
+import { Container, ContentContainer, Refresh, NewPostsButton } from "./style";
+import useInterval from "use-interval";
 
 export default function Home() {
     const { localToken } = useContext(LogInContext);
     const [timelinePosts, setTimelinePosts] = React.useState([]);
     const [reloadTimeline, setReloadTimeline] = useState(false);
+    const [allPosts, setAllPosts] = useState([]);
+    const [displayButton, setDisplayButton] = useState(false);
+    const [postQuantity, setPostQuantity] = useState(0);
 
 
     useEffect(() => {
@@ -21,7 +25,20 @@ export default function Home() {
             .catch(err => console.log(err?.response?.data));
     }, [reloadTimeline]);
 
+    function updatePosts() {
+        const newPosts = allPosts.filter(post => !timelinePosts.some(p => p.id === post.id));
+        if(newPosts.length > 0){
+            setDisplayButton(true);
+            setPostQuantity(newPosts.length);
+        };
+    };
 
+    useInterval(() => api.getPosts(localToken.token)
+        .then(res => {
+            setAllPosts(...res.data)
+            updatePosts();
+        })
+        .catch(err => console.log(err?.response?.data)), 15000);
 
     return (
         <>
@@ -31,6 +48,13 @@ export default function Home() {
                 <ContentContainer>
                     <div>
                         <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} />
+                        <NewPostsButton 
+                        onClick={() => setReloadTimeline(!reloadTimeline)}
+                        data-test="load-btn" 
+                        displayButton={displayButton} >
+                            <p>{postQuantity} new posts, load more!</p>
+                            <Refresh />
+                        </NewPostsButton>
                         {timelinePosts.length !== 0 ? timelinePosts?.map((post, i) => {
                             return (
                                 <PostCard
@@ -58,31 +82,4 @@ export default function Home() {
         </>
 
     );
-}
-
-const Container = styled.div`
-    width: 937px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &>h1{
-    
-    width: 145px;
-    height: 64px;
-    font-family: 'Oswald';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 43px;
-    line-height: 64px;
-    /* identical to box height */
-    color: #FFFFFF;
-    margin: 78px 470px 43px 0px;
-    }
-`;
-const ContentContainer = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-`;
+};
