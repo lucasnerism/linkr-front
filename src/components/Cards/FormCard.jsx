@@ -37,7 +37,7 @@ export default function FormCard({ reloadTimeline, setReloadTimeline }) {
                 <Title>What are you going to share today?</Title>
                 <Input onChange={(e) => setLink(e.target.value)} placeholder="http://" data-test="link" required />
                 <TextArea onInput={(e) => setComment(e.target.value)} placeholder="Awesome article about #javascript" data-test="description" />
-                <Button type="submit" data-test="publish-btn" disabled={loading}>Publish</Button>
+                <Button type="submit" data-test="publish-btn" disabled={loading}>{loading ? 'Publishing...' : 'Publish'}</Button>
 
             </Form>
             <ModalLoadingPage loading={loading}></ModalLoadingPage>

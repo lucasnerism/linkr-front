@@ -32,7 +32,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Container data-test="search">
+    <Container>
       <Form onSubmit={handleSubmit}>
         <DebounceInput
           minLength={3}
@@ -40,6 +40,7 @@ export default function SearchBar() {
           onChange={handleChange}
           element={Input}
           placeholder={'Search for people'}
+          data-test="search"
         />
         <Button><FaSearch className="react-icon" /></Button>
       </Form>
