@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import CardForm from "../../components/Cards/FormCard";
 import PostCard from "../../components/Cards/PostCard";
 import Header from "../../components/Header";
@@ -6,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import Hashtags from "../../components/Hashtags/index.jsx";
-import { BiRefresh } from "react-icons/bi";
+import { Container, ContentContainer, Refresh, NewPostsButton } from "./style";
 import useInterval from "use-interval";
 
 export default function Home() {
@@ -14,8 +13,8 @@ export default function Home() {
     const [timelinePosts, setTimelinePosts] = React.useState([]);
     const [reloadTimeline, setReloadTimeline] = useState(false);
     const [allPosts, setAllPosts] = useState([]);
-    const [displayButton, setDisplayButton] = useState(false)
-    const [postQuantity, setPostQuantity] = useState(0)
+    const [displayButton, setDisplayButton] = useState(false);
+    const [postQuantity, setPostQuantity] = useState(0);
 
 
     useEffect(() => {
@@ -31,8 +30,8 @@ export default function Home() {
         if(newPosts.length > 0){
             setDisplayButton(true);
             setPostQuantity(newPosts.length);
-        }
-    }
+        };
+    };
 
     useInterval(() => api.getPosts(localToken.token)
         .then(res => {
@@ -83,49 +82,4 @@ export default function Home() {
         </>
 
     );
-}
-
-const Container = styled.div`
-    width: 937px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &>h1{
-    
-    width: 145px;
-    height: 64px;
-    font-family: 'Oswald';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 43px;
-    line-height: 64px;
-    /* identical to box height */
-    color: #FFFFFF;
-    margin: 78px 470px 43px 0px;
-    }
-`;
-const ContentContainer = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-`;
-const NewPostsButton = styled.button`
-    width: 38rem;
-    height: 4rem;
-    background-color: #1877F2;
-    color: #FFF;
-    border-radius: 1rem;
-    box-shadow: 0 4px 4px rgba(0 0 0 .25);
-    font-family: 'Lato';
-    font-weight: 400;
-    font-size: 1rem;
-    display: ${props => props.displayButton ?"flex" : none};
-    justify-content: center;
-    align-items: center;
-`;
-const Refresh = styled(BiRefresh)`
-    width: 22px;
-    height: 1rem;
-`
+};
