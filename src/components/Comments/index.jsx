@@ -38,12 +38,13 @@ export default function Comments(props){
         api.createComments(props.post_id, { ...formData }, localToken.token)
         .then((response) => {
             console.log(response.data)
-          
+            setLoading(false)
         })
         .catch((error) => {
           setLoading(false);
-          if (error.response.status === 404 || error.response.status === 401) {
-            alert('O comentário não pode estar vazio!');
+          console.log(error?.response?.status)
+          if (error?.response?.status === 404 || error?.response?.status === 401) {
+            alert('O comentário não pode estar vazio!' );
           }
         });
 
@@ -77,7 +78,7 @@ export default function Comments(props){
                     placeholder="write a comment..."
                     name="comment"
                     type="text"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={formData.comment}></input>
                     <button type="submit"><BsSend className="react-icon"/></button>
 
