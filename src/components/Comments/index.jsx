@@ -55,15 +55,17 @@ export default function Comments(props){
     return(
         <>
             <Container>
-                <button onClick={() => setDisplay("flex")}><AiOutlineComment className="react-icon"/></button>
-                <p>{comments.length} comments</p>
+                <button data-test="comment-btn" onClick={() => setDisplay("flex")}><AiOutlineComment className="react-icon"/></button>
+                <p data-test="comment-counter">{comments.length} comments</p>
             </Container>
-            <CommentsContainer display={display}>
+            <CommentsContainer data-test="comment-box" display={display}>
                 {comments.map(c => 
-                                <Comment>
+                                <Comment  data-test="comment">
                                 <img src={c.profile_picture}/>
                                 <div>
-                                    <h1>{c.name} <span>• following</span></h1>
+                                    <h1>{c.name} <span>
+                                      {c.post_author === c.user_id ? " • post's author" : (c.is_following ? " • following" : " • follow")}
+                                      </span></h1>
                                     <h2>{c.comment}</h2>
                                 </div>
             
@@ -75,12 +77,13 @@ export default function Comments(props){
                     <img src={localToken.profile_picture}/>
                     <form onSubmit={handleSubmit}>
                     <input 
+                    data-test="comment-input"
                     placeholder="write a comment..."
                     name="comment"
                     type="text"
                     onChange={handleChange}
                     value={formData.comment}></input>
-                    <button type="submit"><BsSend className="react-icon"/></button>
+                    <button data-test="comment-submit" type="submit"><BsSend className="react-icon"/></button>
 
                     </form>
                     
