@@ -54,12 +54,12 @@ export default function Comments(props){
     return(
         <>
             <Container>
-                <button onClick={() => setDisplay("flex")}><AiOutlineComment className="react-icon"/></button>
-                <p>{comments.length} comments</p>
+                <button data-test="comment-btn" onClick={() => setDisplay("flex")}><AiOutlineComment className="react-icon"/></button>
+                <p data-test="comment-counter">{comments.length} comments</p>
             </Container>
-            <CommentsContainer display={display}>
+            <CommentsContainer data-test="comment-box" display={display}>
                 {comments.map(c => 
-                                <Comment>
+                                <Comment  data-test="comment">
                                 <img src={c.profile_picture}/>
                                 <div>
                                     <h1>{c.name} <span>• following</span></h1>
@@ -79,7 +79,7 @@ export default function Comments(props){
                     type="text"
                     onChange={handleChange}
                     value={formData.comment}></input>
-                    <button type="submit"><BsSend className="react-icon"/></button>
+                    <button data-test="comment-submit" type="submit"><BsSend className="react-icon"/></button>
 
                     </form>
                     

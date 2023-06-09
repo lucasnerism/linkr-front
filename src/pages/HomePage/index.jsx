@@ -35,7 +35,7 @@ export default function Home() {
 
     useInterval(() => api.getPosts(localToken.token)
         .then(res => {
-            setAllPosts(...res.data)
+            setAllPosts(res.data)
             updatePosts();
         })
         .catch(err => console.log(err?.response?.data)), 15000);
