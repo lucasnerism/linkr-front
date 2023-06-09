@@ -5,6 +5,7 @@ import { func } from "prop-types";
 
 export default function FollowingButton({ id, localToken, otherUser, checkFollow, setCheckFollow, requestBack, setRequestBack }) {
 
+
     function handleFollow() {
         setRequestBack(true);
         if (!checkFollow) {
@@ -14,9 +15,9 @@ export default function FollowingButton({ id, localToken, otherUser, checkFollow
                     setRequestBack(false);
                 })
                 .catch((err) => {
-                    alert(err?.response?.data);
-                    setRequestBack(false);
-                });
+                    alert(err?.response?.data)
+                    setRequestBack(false)
+                })
         } else {
             api.deleteFollow(id, localToken.token)
                 .then((res) => {
