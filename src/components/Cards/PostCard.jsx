@@ -132,7 +132,7 @@ export default function PostCard(props) {
             </Form>
             <Like post_id={id} likes={likes} />
             </PostsInfo>
-            <Comments />
+            <Comments post_id={id} userId={userId} userName={userName}/>
         </Container>
     );
 }
