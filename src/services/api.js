@@ -69,11 +69,19 @@ const getPostsByHashtag = (tag, token) => {
 };
 
 const createFollow = (id, token) => {
-  return axiosInstance.post(`/user/follow/${id}`, createHeader(token))
+  return axiosInstance.post(`/user/follow/${id}`, {}, createHeader(token))
 }
 
 const deleteFollow = (id, token) => {
-  return axiosInstance.delete(`/user/follow/${id}`, createHeader(token))
+  return axiosInstance.delete(`/user/follow/${id}`, createHeader(token));
+};
+
+const getPostComments = (postId, token) => {
+  return axiosInstance.get(`/posts/${postId}/comments`, createHeader(token));
+};
+
+const createComments = (postId, body, token) => {
+  return axiosInstance.post(`/posts/${postId}/comments`, body, createHeader(token));
 }
 
 export default {
@@ -91,5 +99,7 @@ export default {
   createPost,
   getPostsByHashtag,
   createFollow,
-  deleteFollow
+  deleteFollow,
+  getPostComments,
+  createComments
 };
