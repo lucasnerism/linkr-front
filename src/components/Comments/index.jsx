@@ -74,6 +74,7 @@ export default function Comments(props){
                     <img src={localToken.profile_picture}/>
                     <form onSubmit={handleSubmit}>
                     <input 
+                    data-test="comment-input"
                     placeholder="write a comment..."
                     name="comment"
                     type="text"
