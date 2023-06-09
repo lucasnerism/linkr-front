@@ -144,7 +144,6 @@ width: 100%;
 box-sizing: border-box;
 background: ${props => props.color == 'white' ? '#FFFFFF' : '#171717'};
 border-radius: 16px;
-z-index: 1;
 `
 
 const EditionButton = styled(HiPencil)`

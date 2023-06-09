@@ -99,7 +99,6 @@ export const Container = styled.div`
   width: 45px;
   top: 135px;
   left: 17px;
-  z-index: 2;
   button{
     width: 21px;
     height: 21px;
