@@ -1,48 +1,48 @@
-import styled from "styled-components"
-import React, { useEffect } from "react"
-import api from "../../services/api"
-import { func } from "prop-types"
+import styled from "styled-components";
+import React, { useEffect } from "react";
+import api from "../../services/api";
+import { func } from "prop-types";
 
-export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow, requestBack, setRequestBack}) {
+export default function FollowingButton({ id, localToken, otherUser, checkFollow, setCheckFollow, requestBack, setRequestBack }) {
 
-    function handleFollow () {
-        setRequestBack(true)
-        if(!checkFollow){
-            console.log(localToken.token)
+
+    function handleFollow() {
+        setRequestBack(true);
+        if (!checkFollow) {
             api.createFollow(id, localToken.token)
                 .then((res) => {
-                    setCheckFollow(true)
-                    setRequestBack(false)
+                    setCheckFollow(true);
+                    setRequestBack(false);
                 })
                 .catch((err) => {
                     alert(err?.response?.data)
                     setRequestBack(false)
                 })
-        }else {
+        } else {
             api.deleteFollow(id, localToken.token)
                 .then((res) => {
-                    setCheckFollow(false)
-                    setRequestBack(false)
+                    setCheckFollow(false);
+                    setRequestBack(false);
                 })
                 .catch((err) => {
-                    alert(err?.response?.data)
-                    setRequestBack(false)
-                })
+                    alert(err?.response?.data);
+                    setRequestBack(false);
+                });
         }
-        
+
     }
 
     return (
-        <FollowingContainer 
+        <FollowingContainer
             data-test="follow-btn"
-            follow={checkFollow} 
+            follow={checkFollow}
             otherUser={otherUser}
             onClick={handleFollow}
             disabled={requestBack}
-            >
-              {checkFollow ? "unfollow" : "follow"}
-          </FollowingContainer>
-    )
+        >
+            {checkFollow ? "unfollow" : "follow"}
+        </FollowingContainer>
+    );
 }
 
 const FollowingContainer = styled.button`
@@ -61,4 +61,4 @@ const FollowingContainer = styled.button`
   color: ${(props) => props.follow ? "#0d77e8" : "white"};
   background-color: ${(props) => props.follow ? "white" : "#0d77e8"};
 
-`
+`;
