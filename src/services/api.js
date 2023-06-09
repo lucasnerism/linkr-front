@@ -69,8 +69,8 @@ const getPostsByHashtag = (tag, token) => {
 };
 
 const createFollow = (id, token) => {
-  return axiosInstance.post(`/user/follow/${id}`, createHeader(token));
-};
+  return axiosInstance.post(`/user/follow/${id}`, {}, createHeader(token))
+}
 
 const deleteFollow = (id, token) => {
   return axiosInstance.delete(`/user/follow/${id}`, createHeader(token));
