@@ -8,7 +8,8 @@ export default function FollowingButton ({id, localToken, otherUser, checkFollow
     function handleFollow () {
         setRequestBack(true)
         if(!checkFollow){
-            api.createFollow(id, localToken.id)
+            console.log(localToken.token)
+            api.createFollow(id, localToken.token)
                 .then((res) => {
                     setCheckFollow(true)
                     setRequestBack(false)
@@ -18,7 +19,7 @@ export default function FollowingButton ({id, localToken, otherUser, checkFollow
                     setRequestBack(false)
                 })
         }else {
-            api.deleteFollow(id, localToken.id)
+            api.deleteFollow(id, localToken.token)
                 .then((res) => {
                     setCheckFollow(false)
                     setRequestBack(false)

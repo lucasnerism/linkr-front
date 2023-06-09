@@ -17,6 +17,7 @@ export default function SearchBar() {
     api.searchUsers(query.toString(), localToken.token)
       .then(res => {
         setUsers(res.data);
+        console.log(res.data)
       })
       .catch(err => console.log(err?.response?.data));
   };
