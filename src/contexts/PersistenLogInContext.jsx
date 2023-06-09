@@ -12,9 +12,6 @@ export default function LogInProvider({ children }) {
         if (!localUser && window.location.pathname !== "/sign-up") {
             navigate("/");
         }
-        if (localUser) {
-            navigate("/timeline");
-        }
     }, []);
 
     return (

@@ -7,7 +7,7 @@ import api from "../../services/api.js";
 import { LogInContext } from "../../contexts/PersistenLogInContext";
 import ModalLoadingPage from "../LoadingModal/index.jsx";
 
-export default function FormCard({ reloadTimeline, setReloadTimeline }) {
+export default function FormCard({ reloadTimeline, setReloadTimeline, setPosts }) {
 
     const [link, setLink] = React.useState("");
     const [comment, setComment] = React.useState("");
@@ -17,6 +17,25 @@ export default function FormCard({ reloadTimeline, setReloadTimeline }) {
     function createNewPost(e) {
         e.preventDefault();
 
+        setPosts((prev) => {
+            const post = {
+                id: "temp_id",
+                userId: localToken.id,
+                userImage: localToken.profile_picture,
+                userName: '...',
+                comment,
+                link,
+                title: "...",
+                description: "...",
+                image: "",
+                hashtags: [],
+                likes: { total: 0, users: [] },
+                reposted_by: null
+            };
+            const newPosts = [post, ...prev];
+            return newPosts;
+        });
+
         setLoading(true);
         const body = { link, comment };
         api.createPost(body, localToken.token)
@@ -25,6 +44,9 @@ export default function FormCard({ reloadTimeline, setReloadTimeline }) {
                 setReloadTimeline(!reloadTimeline);
             })
             .catch((error) => {
+                setPosts((prev) => {
+                    return prev.slice(1);
+                });
                 setLoading(false);
                 alert("There was an error publishing your link");
             });
@@ -56,6 +78,7 @@ const Title = styled.p`
     font-size: 20px;
     line-height: 24px;
     color: #707070;
+    margin-bottom: 10px;
 `;
 const Input = styled.input`
     width: 503px;
