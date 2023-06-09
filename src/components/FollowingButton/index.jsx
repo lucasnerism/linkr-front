@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { useEffect } from "react"
 import api from "../../services/api"
-import { func } from "prop-types"
 
 export default function FollowingButton ({id, localToken, otherUser, checkFollow, setCheckFollow, requestBack, setRequestBack}) {
 
