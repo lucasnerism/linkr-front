@@ -64,7 +64,7 @@ export default function Comments(props){
                                 <img src={c.profile_picture}/>
                                 <div>
                                     <h1>{c.name} <span>
-                                      {c.post_author === c.user_id ? " • post's author" : (c.is_following ? " • following" : " • follow")}
+                                      {c.post_author === c.user_id ? " • post's author" : (c.is_following ? " • following" : "")}
                                       </span></h1>
                                     <h2>{c.comment}</h2>
                                 </div>
