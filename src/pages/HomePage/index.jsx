@@ -32,6 +32,11 @@ export default function Home() {
             setPostQuantity(newPosts.length);
         };
     };
+    function handleClick(){
+        setReloadTimeline(!reloadTimeline);
+        setDisplayButton(false);
+        setPostQuantity(0);
+    }
 
     useInterval(() => api.getPosts(localToken.token)
         .then(res => {
@@ -49,7 +54,7 @@ export default function Home() {
                     <div>
                         <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} />
                         <NewPostsButton 
-                        onClick={() => setReloadTimeline(!reloadTimeline)}
+                        onClick={handleClick}
                         data-test="load-btn" 
                         displayButton={displayButton} >
                             <p>{postQuantity} new posts, load more!</p>
