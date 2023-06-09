@@ -40,6 +40,7 @@ font-size: 1rem;
 display: ${props => props.displayButton ?"flex" : "none"};
 justify-content: center;
 align-items: center;
+margin-bottom: 2rem;
 `;
 export const Refresh = styled(BiRefresh)`
 width: 22px;
