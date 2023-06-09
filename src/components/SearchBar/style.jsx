@@ -8,7 +8,7 @@ export const Container = styled.div`
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 3;
   &>div{
     background-color: #E7E7E7;
     overflow-x: scroll;

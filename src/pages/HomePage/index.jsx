@@ -27,12 +27,12 @@ export default function Home() {
 
     function updatePosts() {
         const newPosts = allPosts.filter(post => !timelinePosts.some(p => p.id === post.id));
-        if(newPosts.length > 0){
+        if (newPosts.length > 0) {
             setDisplayButton(true);
             setPostQuantity(newPosts.length);
         };
     };
-    function handleClick(){
+    function handleClick() {
         setReloadTimeline(!reloadTimeline);
         setDisplayButton(false);
         setPostQuantity(0);
@@ -52,11 +52,11 @@ export default function Home() {
                 <h1>timeline</h1>
                 <ContentContainer>
                     <div>
-                        <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} />
-                        <NewPostsButton 
-                        onClick={handleClick}
-                        data-test="load-btn" 
-                        displayButton={displayButton} >
+                        <CardForm reloadTimeline={reloadTimeline} setReloadTimeline={setReloadTimeline} setPosts={setAllPosts} />
+                        <NewPostsButton
+                            onClick={handleClick}
+                            data-test="load-btn"
+                            displayButton={displayButton} >
                             <p>{postQuantity} new posts, load more!</p>
                             <Refresh />
                         </NewPostsButton>
