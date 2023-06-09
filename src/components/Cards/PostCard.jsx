@@ -12,6 +12,7 @@ import { LogInContext } from "../../contexts/PersistenLogInContext.jsx";
 import { useContext } from "react";
 import ModalLoadingPage from "../LoadingModal/index.jsx";
 import Like from "../Like/index.jsx";
+import Comments from "../Comments/index.jsx";
 
 export default function PostCard(props) {
     const { id, userId, userImage, userName, comment: originalComment, link, title, description, image, hashtags, likes, commentText } = props;
@@ -83,6 +84,7 @@ export default function PostCard(props) {
 
     return (
         <Container data-test="post" >
+            <PostsInfo>
             <UserImage src={userImage} />
             <Form>
                 <UserName data-test="username"><Link to={`/user/${userId}`}>{userName} </Link>
@@ -129,9 +131,21 @@ export default function PostCard(props) {
                 </PostContainer>
             </Form>
             <Like post_id={id} likes={likes} />
+            </PostsInfo>
+            <Comments />
         </Container>
     );
 }
+
+const PostsInfo = styled.div`
+display: flex;
+padding: 15px;
+width: 100%;
+box-sizing: border-box;
+background: ${props => props.color == 'white' ? '#FFFFFF' : '#171717'};
+border-radius: 16px;
+z-index: 1;
+`
 
 const EditionButton = styled(HiPencil)`
     width: 20px;
