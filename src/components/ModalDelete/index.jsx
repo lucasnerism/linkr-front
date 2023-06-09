@@ -84,6 +84,7 @@ const ModalContainer = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: 4;
 `
 const ConfirmOptions = styled.div`
   
@@ -120,6 +121,7 @@ const ModalText = styled.div`
   width: 70%;
   height: 90%;
   text-align: center;
+  z-index: 4;
 
   h2 {
     font-size: 33px;
@@ -139,5 +141,6 @@ const ModalDelete = styled(Modal)`
   visibility: visible;
   background-color: #171717;
   display: flex;
+  z-index: 4;
 
 `
