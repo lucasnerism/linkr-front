@@ -11,8 +11,8 @@ export default function Comments(props){
     const [loading, setLoading] = useState(false);
     const [comments, setComments] = useState([]);
     const [formData, setFormData] = useState({ comment: ''});
+    const [checkUseEF, setCheckUseEf] = useState((false))
 
-  
     useEffect(() => {
       setLoading(true);
       api.getPostComments(props.post_id, localToken.token)
@@ -25,7 +25,7 @@ export default function Comments(props){
           console.log(err?.response?.data);
           setLoading(false);
         });
-    }, []);
+    }, [checkUseEF]);
 
     function handleChange(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,11 +34,12 @@ export default function Comments(props){
     function handleSubmit(e){
         e.preventDefault();
         setLoading(true);
-    
+
         api.createComments(props.post_id, { ...formData }, localToken.token)
         .then((response) => {
             console.log(response.data)
-          
+            setLoading(false);
+            setCheckUseEf(!checkUseEF)
         })
         .catch((error) => {
           setLoading(false);
